@@ -30,13 +30,9 @@ namespace ProjektOkienkowy
 
         private void Triangle_Click(object sender, EventArgs e)
         {
-
-           
             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-            Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 40, Y = 60 }, new Point { X = 60, Y = 140 } };
-            g.DrawPolygon(pen, points);
-            
-
+            Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 40, Y = 60 }, new Point { X = 60, Y = 140 } }; // ustawianie wierzchołków trójkąta
+            g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
         }
 
         private void Clear_Click(object sender, EventArgs e)
@@ -48,13 +44,12 @@ namespace ProjektOkienkowy
         private void Parallelogram_Click(object sender, EventArgs e)
         {
             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-            Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 120, Y = 50 }, new Point { X = 190, Y = 50 }, new Point { X = 170, Y = 100 } };
-            g.DrawPolygon(pen, points);
+            Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 120, Y = 50 }, new Point { X = 190, Y = 50 }, new Point { X = 170, Y = 100 } }; // ustawianie wierzchołków równoległoboku
+            g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku równoległobok bo 4 wierzchołki)
         }
 
         private void Complex_Click(object sender, EventArgs e)
         {
-            
             Form2 complex_shape_window = new Form2();
             complex_shape_window.Show();
             this.Hide();
@@ -62,7 +57,7 @@ namespace ProjektOkienkowy
 
         private void whiteboard_Click(object sender, EventArgs e)
         {
-
+           
         }
     }
 }

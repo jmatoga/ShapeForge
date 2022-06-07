@@ -12,6 +12,7 @@ namespace ProjektOkienkowy
 {
     public partial class Form2 : Form
     {
+        string data = "";
         public Form2()
         {
             InitializeComponent();
@@ -25,6 +26,22 @@ namespace ProjektOkienkowy
         }
       
         private void read_Click(object sender, EventArgs e)
+        {
+            //label1.Text = textBox1.Text;
+            data = textBox1.Text;
+            if(data == "d")
+                this.Hide();
+        }
+
+        private void textBox1_keyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                MessageBox.Show("dasda");
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
             label1.Text = textBox1.Text;
         }
