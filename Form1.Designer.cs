@@ -79,6 +79,7 @@ namespace ProjektOkienkowy
             this.whiteboard.Size = new System.Drawing.Size(718, 558);
             this.whiteboard.TabIndex = 5;
             this.whiteboard.TabStop = false;
+            this.whiteboard.Click += new System.EventHandler(this.whiteboard_Click);
             // 
             // Complex
             // 
@@ -89,6 +90,7 @@ namespace ProjektOkienkowy
             this.Complex.TabIndex = 6;
             this.Complex.Text = "Complex_Shape";
             this.Complex.UseVisualStyleBackColor = false;
+            this.Complex.Click += new System.EventHandler(this.Complex_Click);
             // 
             // Clear
             // 
@@ -112,6 +114,9 @@ namespace ProjektOkienkowy
             this.Controls.Add(this.Parallelogram);
             this.Controls.Add(this.Triangle);
             this.Controls.Add(this.Circle);
+            this.Location = new System.Drawing.Point(50, 50);
+            this.MaximumSize = new System.Drawing.Size(1038, 629);
+            this.MinimumSize = new System.Drawing.Size(1038, 629);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).EndInit();
