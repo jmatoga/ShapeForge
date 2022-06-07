@@ -41,7 +41,7 @@ namespace ProjektOkienkowy
             // 
             // Clear
             // 
-            this.Clear.Location = new System.Drawing.Point(895, 232);
+            this.Clear.Location = new System.Drawing.Point(865, 236);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(127, 34);
             this.Clear.TabIndex = 13;
@@ -51,7 +51,7 @@ namespace ProjektOkienkowy
             // Complex
             // 
             this.Complex.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Complex.Location = new System.Drawing.Point(895, 168);
+            this.Complex.Location = new System.Drawing.Point(865, 172);
             this.Complex.Name = "Complex";
             this.Complex.Size = new System.Drawing.Size(127, 48);
             this.Complex.TabIndex = 12;
@@ -70,7 +70,7 @@ namespace ProjektOkienkowy
             // Parallelogram
             // 
             this.Parallelogram.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Parallelogram.Location = new System.Drawing.Point(895, 113);
+            this.Parallelogram.Location = new System.Drawing.Point(865, 117);
             this.Parallelogram.Name = "Parallelogram";
             this.Parallelogram.Size = new System.Drawing.Size(127, 49);
             this.Parallelogram.TabIndex = 10;
@@ -80,7 +80,7 @@ namespace ProjektOkienkowy
             // Triangle
             // 
             this.Triangle.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Triangle.Location = new System.Drawing.Point(895, 69);
+            this.Triangle.Location = new System.Drawing.Point(865, 73);
             this.Triangle.Name = "Triangle";
             this.Triangle.Size = new System.Drawing.Size(127, 38);
             this.Triangle.TabIndex = 9;
@@ -90,7 +90,7 @@ namespace ProjektOkienkowy
             // Circle
             // 
             this.Circle.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Circle.Location = new System.Drawing.Point(895, 22);
+            this.Circle.Location = new System.Drawing.Point(865, 26);
             this.Circle.Name = "Circle";
             this.Circle.Size = new System.Drawing.Size(127, 41);
             this.Circle.TabIndex = 8;
