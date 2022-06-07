@@ -69,9 +69,9 @@ namespace ProjektOkienkowy
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(632, 273);
+            this.checkedListBox1.Location = new System.Drawing.Point(113, 40);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(120, 106);
+            this.checkedListBox1.Size = new System.Drawing.Size(272, 225);
             this.checkedListBox1.TabIndex = 4;
             // 
             // Form1
