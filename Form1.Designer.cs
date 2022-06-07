@@ -79,7 +79,7 @@ namespace ProjektOkienkowy
             this.whiteboard.Size = new System.Drawing.Size(718, 558);
             this.whiteboard.TabIndex = 5;
             this.whiteboard.TabStop = false;
-        //    this.whiteboard.Click += new System.EventHandler(this.whiteboard_Click);
+            this.whiteboard.Click += new System.EventHandler(this.whiteboard_Click);
             // 
             // Complex
             // 
@@ -90,7 +90,7 @@ namespace ProjektOkienkowy
             this.Complex.TabIndex = 6;
             this.Complex.Text = "Complex_Shape";
             this.Complex.UseVisualStyleBackColor = false;
-           // this.Complex.Click += new System.EventHandler(this.Complex_Click);
+            this.Complex.Click += new System.EventHandler(this.Complex_Click);
             // 
             // Clear
             // 
