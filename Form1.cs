@@ -51,5 +51,18 @@ namespace ProjektOkienkowy
             Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 120, Y = 50 }, new Point { X = 190, Y = 50 }, new Point { X = 170, Y = 100 } };
             g.DrawPolygon(pen, points);
         }
+
+        private void Complex_Click(object sender, EventArgs e)
+        {
+            
+            Form2 complex_shape_window = new Form2();
+            complex_shape_window.Show();
+            this.Hide();
+        }
+
+        private void whiteboard_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
