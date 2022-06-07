@@ -14,7 +14,10 @@ namespace ProjektOkienkowy
     public partial class Form1 : Form
     {
         private System.Drawing.Graphics g; // tworzenie zmiennej Grapihics do rysowania 
+        private System.Drawing.Graphics gB; // tworzenie zmiennej Grapihics do rysowania 
         private System.Drawing.Pen pen = new System.Drawing.Pen(Color.Aqua, 3); // tworzenie dlugopisa do rysowania 
+        private System.Drawing.Pen clearrPen = new System.Drawing.Pen(Color.Red, 10000); // tworzenie dlugopisa do rysowania 
+
         public Form1()
         {
             InitializeComponent(); // to sie robi samo - metoda wymagana do obsługi projektanta 
@@ -30,6 +33,9 @@ namespace ProjektOkienkowy
 
         private void Triangle_Click(object sender, EventArgs e)
         {
+            //whiteboard.Hide();
+            //whiteboard.Image = null;
+            //whiteboard.Show();
             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
             Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 40, Y = 60 }, new Point { X = 60, Y = 140 } }; // ustawianie wierzchołków trójkąta
             g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
@@ -46,6 +52,9 @@ namespace ProjektOkienkowy
             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
             Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 120, Y = 50 }, new Point { X = 190, Y = 50 }, new Point { X = 170, Y = 100 } }; // ustawianie wierzchołków równoległoboku
             g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku równoległobok bo 4 wierzchołki)
+           // Point[] pointy = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 110, Y = 50 }, new Point { X = 170, Y = 50 }, new Point { X = 160, Y = 100 } }; // ustawianie wierzchołków równoległoboku
+            // g.DrawPolygon(clearrPen, pointy);
+
         }
 
         private void Complex_Click(object sender, EventArgs e)
