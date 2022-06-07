@@ -34,8 +34,10 @@ namespace ProjektOkienkowy
             this.whiteboard = new System.Windows.Forms.PictureBox();
             this.Parallelogram = new System.Windows.Forms.Button();
             this.Triangle = new System.Windows.Forms.Button();
-            this.Circle = new System.Windows.Forms.Button();
+            this.read = new System.Windows.Forms.Button();
             this.Back = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +53,7 @@ namespace ProjektOkienkowy
             // Complex
             // 
             this.Complex.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Complex.Location = new System.Drawing.Point(895, 168);
+            this.Complex.Location = new System.Drawing.Point(862, 178);
             this.Complex.Name = "Complex";
             this.Complex.Size = new System.Drawing.Size(127, 48);
             this.Complex.TabIndex = 12;
@@ -70,7 +72,7 @@ namespace ProjektOkienkowy
             // Parallelogram
             // 
             this.Parallelogram.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Parallelogram.Location = new System.Drawing.Point(895, 113);
+            this.Parallelogram.Location = new System.Drawing.Point(862, 123);
             this.Parallelogram.Name = "Parallelogram";
             this.Parallelogram.Size = new System.Drawing.Size(127, 49);
             this.Parallelogram.TabIndex = 10;
@@ -80,32 +82,50 @@ namespace ProjektOkienkowy
             // Triangle
             // 
             this.Triangle.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Triangle.Location = new System.Drawing.Point(895, 69);
+            this.Triangle.Location = new System.Drawing.Point(862, 79);
             this.Triangle.Name = "Triangle";
             this.Triangle.Size = new System.Drawing.Size(127, 38);
             this.Triangle.TabIndex = 9;
             this.Triangle.Text = "Triangle";
             this.Triangle.UseVisualStyleBackColor = false;
             // 
-            // Circle
+            // read
             // 
-            this.Circle.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Circle.Location = new System.Drawing.Point(895, 22);
-            this.Circle.Name = "Circle";
-            this.Circle.Size = new System.Drawing.Size(127, 41);
-            this.Circle.TabIndex = 8;
-            this.Circle.Text = "Circle";
-            this.Circle.UseVisualStyleBackColor = false;
+            this.read.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.read.Location = new System.Drawing.Point(862, 32);
+            this.read.Name = "read";
+            this.read.Size = new System.Drawing.Size(127, 41);
+            this.read.TabIndex = 8;
+            this.read.Text = "read";
+            this.read.UseVisualStyleBackColor = false;
+            this.read.Click += new System.EventHandler(this.read_Click);
             // 
             // Back
             // 
             this.Back.Location = new System.Drawing.Point(12, 12);
             this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(54, 51);
+            this.Back.Size = new System.Drawing.Size(64, 61);
             this.Back.TabIndex = 14;
             this.Back.Text = "button1";
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.back_button_click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(862, 329);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(127, 22);
+            this.textBox1.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(854, 296);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(154, 30);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "tu cos wpisz";
             // 
             // Form2
             // 
@@ -113,13 +133,15 @@ namespace ProjektOkienkowy
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1020, 582);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.Complex);
             this.Controls.Add(this.whiteboard);
             this.Controls.Add(this.Parallelogram);
             this.Controls.Add(this.Triangle);
-            this.Controls.Add(this.Circle);
+            this.Controls.Add(this.read);
             this.Location = new System.Drawing.Point(-50, -50);
             this.MaximumSize = new System.Drawing.Size(1038, 629);
             this.MinimumSize = new System.Drawing.Size(1038, 629);
@@ -127,6 +149,7 @@ namespace ProjektOkienkowy
             this.Text = "Form2";
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -137,7 +160,9 @@ namespace ProjektOkienkowy
         private System.Windows.Forms.PictureBox whiteboard;
         private System.Windows.Forms.Button Parallelogram;
         private System.Windows.Forms.Button Triangle;
-        private System.Windows.Forms.Button Circle;
+        private System.Windows.Forms.Button read;
         private System.Windows.Forms.Button Back;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
     }
 }

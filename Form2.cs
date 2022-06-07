@@ -23,5 +23,10 @@ namespace ProjektOkienkowy
             back_to_form1.Show();
             this.Hide();
         }
+      
+        private void read_Click(object sender, EventArgs e)
+        {
+            label1.Text = textBox1.Text;
+        }
     }
 }
