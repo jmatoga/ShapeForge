@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic; // aby móc pobierac informajce z okienka wyskakującego
 
 
 namespace ProjektOkienkowy
@@ -25,9 +26,37 @@ namespace ProjektOkienkowy
 
         private void Circle_click(object sender, EventArgs e)
         {
+            int radius = 0;
             
+            string message = "Please give me radius:", title = "Taking data", defaultValue = "For Example 1";
+            object myValue;
+
+            myValue = Interaction.InputBox(message, title, defaultValue);
+            if ((string)myValue == "")
+            {
+                myValue = defaultValue;
+                Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+            }
+            else
+            {
+                string stringMyValue = (string)myValue;
+
+                // sprawdzam czy podana wartosc jest intem
+                for (int i = 0; i < stringMyValue.Length; i++)
+                    if (stringMyValue[i] < 48 || stringMyValue[i] > 57)
+                    {
+                        Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1. Fisrt letter of error in: " + stringMyValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                        System.Windows.Forms.Application.Exit();
+                    }
+
+
+                radius = Int32.Parse(myValue.ToString()); // konwertuje z stringa do int i przypisuje do wartosci radius
+              //  Interaction.MsgBox("Hello, " + radius + Environment.NewLine + "eloo", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "aaaa");
+            }
+
+
             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-            g.DrawEllipse(pen, 100, 100, 200, 200);
+            g.DrawEllipse(pen, 100, 100, radius, radius);
 
         }
 
@@ -43,7 +72,7 @@ namespace ProjektOkienkowy
 
         private void Clear_Click(object sender, EventArgs e)
         {
-            
+
             whiteboard.Image = null;
         }
 
@@ -52,8 +81,8 @@ namespace ProjektOkienkowy
             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
             Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 120, Y = 50 }, new Point { X = 190, Y = 50 }, new Point { X = 170, Y = 100 } }; // ustawianie wierzchołków równoległoboku
             g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku równoległobok bo 4 wierzchołki)
-           // Point[] pointy = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 110, Y = 50 }, new Point { X = 170, Y = 50 }, new Point { X = 160, Y = 100 } }; // ustawianie wierzchołków równoległoboku
-            // g.DrawPolygon(clearrPen, pointy);
+                                        // Point[] pointy = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 110, Y = 50 }, new Point { X = 170, Y = 50 }, new Point { X = 160, Y = 100 } }; // ustawianie wierzchołków równoległoboku
+                                        // g.DrawPolygon(clearrPen, pointy);
 
         }
 
@@ -66,7 +95,7 @@ namespace ProjektOkienkowy
 
         private void whiteboard_Click(object sender, EventArgs e)
         {
-           
+
         }
     }
 }
