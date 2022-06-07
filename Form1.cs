@@ -15,9 +15,7 @@ namespace ProjektOkienkowy
     public partial class Form1 : Form
     {
         private System.Drawing.Graphics g; // tworzenie zmiennej Grapihics do rysowania 
-        private System.Drawing.Graphics gB; // tworzenie zmiennej Grapihics do rysowania 
         private System.Drawing.Pen pen = new System.Drawing.Pen(Color.Aqua, 3); // tworzenie dlugopisa do rysowania 
-        private System.Drawing.Pen clearrPen = new System.Drawing.Pen(Color.Red, 10000); // tworzenie dlugopisa do rysowania 
 
         public Form1()
         {
@@ -27,9 +25,11 @@ namespace ProjektOkienkowy
         private void Circle_click(object sender, EventArgs e)
         {
             int radius = 0;
-            
-            string message = "Please give me radius:", title = "Taking data", defaultValue = "For Example 1";
+
+            string message = "Please give me the radius:", title = "Taking data", defaultValue = "For example 1";
             object myValue;
+
+            whiteboard.Image = null; // czysczenie textboxa
 
             myValue = Interaction.InputBox(message, title, defaultValue);
             if ((string)myValue == "")
@@ -46,25 +46,18 @@ namespace ProjektOkienkowy
                     if (stringMyValue[i] < 48 || stringMyValue[i] > 57)
                     {
                         Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1. Fisrt letter of error in: " + stringMyValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                        System.Windows.Forms.Application.Exit();
+                        Environment.Exit(1);
                     }
 
-
                 radius = Int32.Parse(myValue.ToString()); // konwertuje z stringa do int i przypisuje do wartosci radius
-              //  Interaction.MsgBox("Hello, " + radius + Environment.NewLine + "eloo", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "aaaa");
             }
 
-
             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-            g.DrawEllipse(pen, 100, 100, radius, radius);
-
+            g.DrawEllipse(pen, 100, 100, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
         }
 
         private void Triangle_Click(object sender, EventArgs e)
         {
-            //whiteboard.Hide();
-            //whiteboard.Image = null;
-            //whiteboard.Show();
             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
             Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 40, Y = 60 }, new Point { X = 60, Y = 140 } }; // ustawianie wierzchołków trójkąta
             g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
@@ -72,7 +65,6 @@ namespace ProjektOkienkowy
 
         private void Clear_Click(object sender, EventArgs e)
         {
-
             whiteboard.Image = null;
         }
 
@@ -81,9 +73,6 @@ namespace ProjektOkienkowy
             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
             Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 120, Y = 50 }, new Point { X = 190, Y = 50 }, new Point { X = 170, Y = 100 } }; // ustawianie wierzchołków równoległoboku
             g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku równoległobok bo 4 wierzchołki)
-                                        // Point[] pointy = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 110, Y = 50 }, new Point { X = 170, Y = 50 }, new Point { X = 160, Y = 100 } }; // ustawianie wierzchołków równoległoboku
-                                        // g.DrawPolygon(clearrPen, pointy);
-
         }
 
         private void Complex_Click(object sender, EventArgs e)
