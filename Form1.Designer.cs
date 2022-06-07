@@ -41,9 +41,10 @@ namespace ProjektOkienkowy
             // Circle
             // 
             this.Circle.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Circle.Location = new System.Drawing.Point(814, 44);
+            this.Circle.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Circle.Location = new System.Drawing.Point(814, 26);
             this.Circle.Name = "Circle";
-            this.Circle.Size = new System.Drawing.Size(127, 41);
+            this.Circle.Size = new System.Drawing.Size(172, 46);
             this.Circle.TabIndex = 0;
             this.Circle.Text = "Circle";
             this.Circle.UseVisualStyleBackColor = false;
@@ -52,9 +53,10 @@ namespace ProjektOkienkowy
             // Triangle
             // 
             this.Triangle.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Triangle.Location = new System.Drawing.Point(814, 91);
+            this.Triangle.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Triangle.Location = new System.Drawing.Point(814, 78);
             this.Triangle.Name = "Triangle";
-            this.Triangle.Size = new System.Drawing.Size(127, 38);
+            this.Triangle.Size = new System.Drawing.Size(172, 51);
             this.Triangle.TabIndex = 2;
             this.Triangle.Text = "Triangle";
             this.Triangle.UseVisualStyleBackColor = false;
@@ -63,9 +65,10 @@ namespace ProjektOkienkowy
             // Parallelogram
             // 
             this.Parallelogram.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Parallelogram.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Parallelogram.Location = new System.Drawing.Point(814, 135);
             this.Parallelogram.Name = "Parallelogram";
-            this.Parallelogram.Size = new System.Drawing.Size(127, 49);
+            this.Parallelogram.Size = new System.Drawing.Size(172, 49);
             this.Parallelogram.TabIndex = 3;
             this.Parallelogram.Text = "Parallelogram";
             this.Parallelogram.UseVisualStyleBackColor = false;
@@ -84,9 +87,10 @@ namespace ProjektOkienkowy
             // Complex
             // 
             this.Complex.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Complex.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Complex.Location = new System.Drawing.Point(814, 190);
             this.Complex.Name = "Complex";
-            this.Complex.Size = new System.Drawing.Size(127, 48);
+            this.Complex.Size = new System.Drawing.Size(172, 48);
             this.Complex.TabIndex = 6;
             this.Complex.Text = "Complex_Shape";
             this.Complex.UseVisualStyleBackColor = false;
@@ -94,9 +98,10 @@ namespace ProjektOkienkowy
             // 
             // Clear
             // 
-            this.Clear.Location = new System.Drawing.Point(814, 254);
+            this.Clear.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Clear.Location = new System.Drawing.Point(814, 264);
             this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(127, 34);
+            this.Clear.Size = new System.Drawing.Size(172, 34);
             this.Clear.TabIndex = 7;
             this.Clear.Text = "Clear";
             this.Clear.UseVisualStyleBackColor = true;

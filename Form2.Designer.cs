@@ -43,9 +43,10 @@ namespace ProjektOkienkowy
             // 
             // Clear
             // 
-            this.Clear.Location = new System.Drawing.Point(862, 232);
+            this.Clear.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Clear.Location = new System.Drawing.Point(834, 247);
             this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(127, 34);
+            this.Clear.Size = new System.Drawing.Size(174, 34);
             this.Clear.TabIndex = 13;
             this.Clear.Text = "Clear";
             this.Clear.UseVisualStyleBackColor = true;
@@ -53,9 +54,10 @@ namespace ProjektOkienkowy
             // Complex
             // 
             this.Complex.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Complex.Location = new System.Drawing.Point(862, 178);
+            this.Complex.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Complex.Location = new System.Drawing.Point(834, 178);
             this.Complex.Name = "Complex";
-            this.Complex.Size = new System.Drawing.Size(127, 48);
+            this.Complex.Size = new System.Drawing.Size(174, 48);
             this.Complex.TabIndex = 12;
             this.Complex.Text = "Complex_Shape";
             this.Complex.UseVisualStyleBackColor = false;
@@ -63,18 +65,19 @@ namespace ProjektOkienkowy
             // whiteboard
             // 
             this.whiteboard.BackColor = System.Drawing.Color.White;
-            this.whiteboard.Location = new System.Drawing.Point(82, 22);
+            this.whiteboard.Location = new System.Drawing.Point(102, 12);
             this.whiteboard.Name = "whiteboard";
-            this.whiteboard.Size = new System.Drawing.Size(718, 558);
+            this.whiteboard.Size = new System.Drawing.Size(695, 552);
             this.whiteboard.TabIndex = 11;
             this.whiteboard.TabStop = false;
             // 
             // Parallelogram
             // 
             this.Parallelogram.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Parallelogram.Location = new System.Drawing.Point(862, 123);
+            this.Parallelogram.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Parallelogram.Location = new System.Drawing.Point(834, 123);
             this.Parallelogram.Name = "Parallelogram";
-            this.Parallelogram.Size = new System.Drawing.Size(127, 49);
+            this.Parallelogram.Size = new System.Drawing.Size(174, 49);
             this.Parallelogram.TabIndex = 10;
             this.Parallelogram.Text = "Parallelogram";
             this.Parallelogram.UseVisualStyleBackColor = false;
@@ -82,9 +85,10 @@ namespace ProjektOkienkowy
             // Triangle
             // 
             this.Triangle.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Triangle.Location = new System.Drawing.Point(862, 79);
+            this.Triangle.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Triangle.Location = new System.Drawing.Point(834, 69);
             this.Triangle.Name = "Triangle";
-            this.Triangle.Size = new System.Drawing.Size(127, 38);
+            this.Triangle.Size = new System.Drawing.Size(174, 48);
             this.Triangle.TabIndex = 9;
             this.Triangle.Text = "Triangle";
             this.Triangle.UseVisualStyleBackColor = false;
@@ -92,27 +96,29 @@ namespace ProjektOkienkowy
             // read
             // 
             this.read.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.read.Location = new System.Drawing.Point(862, 32);
+            this.read.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.read.Location = new System.Drawing.Point(834, 18);
             this.read.Name = "read";
-            this.read.Size = new System.Drawing.Size(127, 41);
+            this.read.Size = new System.Drawing.Size(174, 45);
             this.read.TabIndex = 8;
-            this.read.Text = "read";
+            this.read.Text = "Circle";
             this.read.UseVisualStyleBackColor = false;
             this.read.Click += new System.EventHandler(this.read_Click);
             // 
             // Back
             // 
+            this.Back.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.Back.Location = new System.Drawing.Point(12, 12);
             this.Back.Name = "Back";
             this.Back.Size = new System.Drawing.Size(64, 61);
             this.Back.TabIndex = 14;
-            this.Back.Text = "button1";
+            this.Back.Text = "back";
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.back_button_click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(862, 329);
+            this.textBox1.Location = new System.Drawing.Point(858, 375);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(127, 22);
             this.textBox1.TabIndex = 15;
@@ -120,12 +126,13 @@ namespace ProjektOkienkowy
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(854, 296);
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(851, 301);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 30);
+            this.label1.Size = new System.Drawing.Size(134, 60);
             this.label1.TabIndex = 16;
-            this.label1.Text = "tu cos wpisz";
+            this.label1.Text = "Enter how many\r\nfigures you want \r\nto draw:\r\n";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form2
             // 
