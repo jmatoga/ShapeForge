@@ -277,6 +277,10 @@ namespace ProjektOkienkowy
             }
     }
 
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            whiteboard.Image = null;
+        }
 
 
 
@@ -285,35 +289,37 @@ namespace ProjektOkienkowy
 
 
 
-    //
+
+        //
 
 
 
 
-    //DO WYWALENIA
-    //    private void read_Click(object sender, EventArgs e)
-    //    {
-    //        //label1.Text = enter_how_many_figures.Text;
-    //        data = enter_how_many_figures.Text;
-    //        if(data == "d")
-    //            this.Hide();
-    //    }
+        //DO WYWALENIA
+        //    private void read_Click(object sender, EventArgs e)
+        //    {
+        //        //label1.Text = enter_how_many_figures.Text;
+        //        data = enter_how_many_figures.Text;
+        //        if(data == "d")
+        //            this.Hide();
+        //    }
 
-    //    private void enter_how_many_figures_keyDown(object sender, KeyEventArgs e)
-    //    {
-    //        if(e.KeyCode == Keys.Enter)
-    //        {
-    //            MessageBox.Show("dasda");
-    //        }
-    //    }
+        //    private void enter_how_many_figures_keyDown(object sender, KeyEventArgs e)
+        //    {
+        //        if(e.KeyCode == Keys.Enter)
+        //        {
+        //            MessageBox.Show("dasda");
+        //        }
+        //    }
 
-    //    private void enter_how_many_figures_TextChanged(object sender, EventArgs e)
-    //    {
-    //        label1.Text = enter_how_many_figures.Text;
-    //    }
-    //}
-}
+        //    private void enter_how_many_figures_TextChanged(object sender, EventArgs e)
+        //    {
+        //        label1.Text = enter_how_many_figures.Text;
+        //    }
+        //}
+    }
  }
+
    
 
 

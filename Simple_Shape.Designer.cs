@@ -41,7 +41,7 @@ namespace ProjektOkienkowy
             // 
             this.Circle.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Circle.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Circle.Location = new System.Drawing.Point(779, 26);
+            this.Circle.Location = new System.Drawing.Point(779, 21);
             this.Circle.Name = "Circle";
             this.Circle.Size = new System.Drawing.Size(184, 51);
             this.Circle.TabIndex = 0;
