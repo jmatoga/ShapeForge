@@ -12,7 +12,7 @@ using System.Runtime.InteropServices; // aby móc wyświetlić konsole !!! (trze
 
 namespace ProjektOkienkowy
 {
-    public partial class Simple_Shape : Form
+    public partial class Simple_Shape : Form//tworzenie okienka pierwszego Simple Shape
     {
         // aby utworzyć konsole
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -20,8 +20,9 @@ namespace ProjektOkienkowy
         static extern bool AllocConsole();
 
         private System.Drawing.Graphics g; // tworzenie zmiennej Grapihics do rysowania 
-        private System.Drawing.Pen pen = new System.Drawing.Pen(Color.Aqua, 3); // tworzenie dlugopisa do rysowania 
-
+        private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3); // tworzenie dlugopisa do rysowania 
+        private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3); // tworzenie dlugopisa do rysowania 
+        private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3); // tworzenie dlugopisa do rysowania 
         public Simple_Shape()
         {
             InitializeComponent(); // to sie robi samo - metoda wymagana do obsługi projektanta 
@@ -62,7 +63,7 @@ namespace ProjektOkienkowy
                 }
 
                 g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                g.DrawEllipse(pen, 0, 0, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+                g.DrawEllipse(pen_circle, 0, 0, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
             }
             else if (resultOfConsWindQuest == DialogResult.No)
             {
@@ -110,8 +111,8 @@ namespace ProjektOkienkowy
 
         private void Triangle_Click(object sender, EventArgs e)
         {
-            string message = "Please give me the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
-            string message1 = "Please give me the second X coords and Y coords:", title1 = "Taking second data";
+            string message = "Please enter the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
+            string message1 = "Please enter the second X coords and Y coords:", title1 = "Taking second data";
             object Value, Value1;
 
             double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
@@ -157,7 +158,7 @@ namespace ProjektOkienkowy
 
                     g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                     Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków trójkąta
-                    g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
+                    g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                 }
             }
         }
@@ -261,7 +262,7 @@ namespace ProjektOkienkowy
 
                     g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                     Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x1_int + x2_int, Y = y1_int + y2_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków równoległoboku
-                    g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
+                    g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                 }
             }
         }

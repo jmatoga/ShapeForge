@@ -35,7 +35,7 @@ namespace ProjektOkienkowy
             this.Triangle = new System.Windows.Forms.Button();
             this.read = new System.Windows.Forms.Button();
             this.Back = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.enter_how_many_figures = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).BeginInit();
             this.SuspendLayout();
@@ -104,12 +104,12 @@ namespace ProjektOkienkowy
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.back_button_click);
             // 
-            // textBox1
+            // enter_how_many_figures
             // 
-            this.textBox1.Location = new System.Drawing.Point(779, 373);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(184, 22);
-            this.textBox1.TabIndex = 15;
+            this.enter_how_many_figures.Location = new System.Drawing.Point(779, 373);
+            this.enter_how_many_figures.Name = "enter_how_many_figures";
+            this.enter_how_many_figures.Size = new System.Drawing.Size(184, 22);
+            this.enter_how_many_figures.TabIndex = 15;
             // 
             // label1
             // 
@@ -129,7 +129,7 @@ namespace ProjektOkienkowy
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1020, 582);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.enter_how_many_figures);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.whiteboard);
@@ -155,7 +155,7 @@ namespace ProjektOkienkowy
         private System.Windows.Forms.Button Triangle;
         private System.Windows.Forms.Button read;
         private System.Windows.Forms.Button Back;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox enter_how_many_figures;
         private System.Windows.Forms.Label label1;
     }
 }

@@ -27,13 +27,13 @@ namespace ProjektOkienkowy
       
         private void read_Click(object sender, EventArgs e)
         {
-            //label1.Text = textBox1.Text;
-            data = textBox1.Text;
+            //label1.Text = enter_how_many_figures.Text;
+            data = enter_how_many_figures.Text;
             if(data == "d")
                 this.Hide();
         }
 
-        private void textBox1_keyDown(object sender, KeyEventArgs e)
+        private void enter_how_many_figures_keyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
             {
@@ -41,9 +41,9 @@ namespace ProjektOkienkowy
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void enter_how_many_figures_TextChanged(object sender, EventArgs e)
         {
-            label1.Text = textBox1.Text;
+            label1.Text = enter_how_many_figures.Text;
         }
     }
 }
