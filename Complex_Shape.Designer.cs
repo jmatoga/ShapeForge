@@ -109,12 +109,12 @@ namespace ProjektOkienkowy
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(849, 308);
-            this.label1.Name = "text_complex_shape";
-            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(774, 268);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(154, 30);
             this.label1.TabIndex = 15;
-            this.label1.Text = "Figures left: " ;
-           
+            this.label1.Text = "Figures left:   5" ;
             // 
             // Complex_Shape
             // 

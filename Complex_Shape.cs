@@ -25,9 +25,9 @@ namespace ProjektOkienkowy
         private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3); // tworzenie dlugopisa do rysowania 
         private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3); // tworzenie dlugopisa do rysowania 
         private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3); // tworzenie dlugopisa do rysowania 
-        int new_beginning=0;//zeby byly obok siebie nowy poczatek wspolrzednej
+        int new_beginning = 0;//zeby byly obok siebie nowy poczatek wspolrzednej
         int new_beginning_y = 0;//nowy pozatek dla y
-        int ifClicked=0;//licznik do ile razy klikniete byl guzik
+        int ifClicked = 0;//licznik do ile razy klikniete byl guzik
 
 
 
@@ -45,6 +45,8 @@ namespace ProjektOkienkowy
             back_to_Simple_Shape.Show();
             this.Hide();
         }
+
+
 
 
         //guzik do circle
@@ -283,7 +285,7 @@ namespace ProjektOkienkowy
 
             if (count == 0)
             {
-                Triangle.Visible = false;
+                Parallelogram.Visible = false;
             }
             else
             {
@@ -366,6 +368,9 @@ namespace ProjektOkienkowy
             ifClicked = 0;
             new_beginning=0;
             new_beginning_y =0;
+            Parallelogram.Visible = true;
+            read.Visible = true;
+            Triangle.Visible = true;
         }
 
 
