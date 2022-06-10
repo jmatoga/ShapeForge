@@ -30,9 +30,9 @@ namespace ProjektOkienkowy
 
         private void Circle_click(object sender, EventArgs e)
         {
-
             System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
             resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
+
             if (resultOfConsWindQuest == DialogResult.Yes)
             {
                 int radius = 0;
@@ -42,11 +42,9 @@ namespace ProjektOkienkowy
                 whiteboard.Image = null; // czysczenie textboxa
 
                 Value = Interaction.InputBox(message, title, defaultValue);
+
                 if ((string)Value == "")
-                {
-                    Value = defaultValue;
                     Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                }
                 else
                 {
                     string stringValue = (string)Value;
@@ -82,13 +80,14 @@ namespace ProjektOkienkowy
                     if (radius <= 0)
                     {
                         MyExceptions error;
-                        error = new MyExceptions();
+                        error = new MyExceptions("My Exception Occured");
+                        error.ErrorMessage = "Error! Radius can't be zero!";
                         throw error;
                     }
                 }
-                catch
+                catch (MyExceptions error)
                 {
-                    Console.WriteLine("Error! Radius can't be zero!");
+                    Console.WriteLine(error.ErrorMessage);
                     Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
                     Environment.Exit(1); // zamknięcie konsoli
                 }
@@ -111,55 +110,156 @@ namespace ProjektOkienkowy
 
         private void Triangle_Click(object sender, EventArgs e)
         {
-            string message = "Please enter the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
-            string message1 = "Please enter the second X coords and Y coords:", title1 = "Taking second data";
-            object Value, Value1;
+            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
+            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
 
-            double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
-
-            whiteboard.Image = null; // czysczenie textboxa
-
-            Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
-
-            // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
-            if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
-                Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-            else
+            if (resultOfConsWindQuest == DialogResult.Yes)
             {
-                Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
-                if ((string)Value1 == "" || (string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
+                string message = "Please enter the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
+                string message1 = "Please enter the second X coords and Y coords:", title1 = "Taking second data";
+                object Value, Value1;
+                double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+
+                whiteboard.Image = null; // czysczenie textboxa
+
+                Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
+
+                // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
+                if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
                     Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
                 else
                 {
-                    string stringValue = (string)Value;
-                    string stringValue1 = (string)Value1;
+                    Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
 
-                    TakeData(sender, e, stringValue, args, 0, 1); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
-                    TakeData(sender, e, stringValue1, args, 2, 3); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
-
-                    // sprawdzam czy podana wartosc jest intem
-                    for (int i = 0; i < stringValue.Length; i++)
+                    if ((string)Value1 == "" || (string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
+                        Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                    else
                     {
-                        // mozna uzyc tylko cyfr lub "-" lub spacji
-                        if (stringValue[i] < 32 || (stringValue[i] > 32 && stringValue[i] < 45 && stringValue[i] > 45 && stringValue[i] < 48) || stringValue[i] > 57)
+                        string stringValue = (string)Value;
+                        string stringValue1 = (string)Value1;
+
+                        TakeData(sender, e, stringValue, args, 0, 1); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
+                        TakeData(sender, e, stringValue1, args, 2, 3); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
+
+                        // sprawdzam czy podana wartosc jest intem
+                        for (int i = 0; i < stringValue.Length; i++)
                         {
-                            Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                            Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            // mozna uzyc tylko cyfr lub "-" lub spacji
+                            if (stringValue[i] < 32 || (stringValue[i] > 32 && stringValue[i] < 45 && stringValue[i] > 45 && stringValue[i] < 48) || stringValue[i] > 57)
+                            {
+                                Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            }
                         }
+
+                        // sprawdzamy założenia
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (i == 3 && args[3] >= 0)
+                            {
+                                Microsoft.VisualBasic.Interaction.MsgBox("Error! Y2 must be negativ intiger", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            }
+                            if (i < 3 && args[i] < 0)
+                            {
+                                string temp = "Wrong Value";
+                                if (i == 0)
+                                    temp = "X1";
+                                else if (i == 1)
+                                    temp = "Y1";
+                                else if (i == 2)
+                                    temp = "X2";
+
+                                Microsoft.VisualBasic.Interaction.MsgBox("Error! " + temp + " can't be negativ intiger", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            }
+                            if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
+                            {
+                                Microsoft.VisualBasic.Interaction.MsgBox("Error! Badly matched coefficients", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            }
+                        }
+
+                        // do wywalenia
+                        Microsoft.VisualBasic.Interaction.MsgBox("DDDDDD " + args[0] + " " + args[1] + " DD" + args[2] + " " + args[3], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "DDDD"); // do wywalenia
+
+                        int x1_int = Convert.ToInt32(args[0]); // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        int y1_int = Convert.ToInt32(args[1]);
+                        int x2_int = Convert.ToInt32(args[2]);
+                        int y2_int = Convert.ToInt32(args[3]);
+
+                        g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
+                        Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków trójkąta
+                        g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                     }
-
-                    // do wywalenia
-                    Microsoft.VisualBasic.Interaction.MsgBox("DDDDDD " + args[0] + " " + args[1] + " DD" + args[2] + " " + args[3], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "DDDD"); // do wywalenia
-
-                    int x1_int = Convert.ToInt32(args[0]); // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
-                    int y1_int = Convert.ToInt32(args[1]);
-                    int x2_int = Convert.ToInt32(args[2]);
-                    int y2_int = Convert.ToInt32(args[3]);
-
-                    g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                    Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków trójkąta
-                    g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                 }
+            }
+            else if (resultOfConsWindQuest == DialogResult.No)
+            {
+                AllocConsole(); // otwiera konsole
+                int[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+                string tempArg;
+
+                Console.Clear(); // czysci konsole
+
+                try
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (i == 0)
+                            Console.Write("Give me X1\n>> ");
+                        else if (i == 1)
+                            Console.Write("Give me Y1\n>> ");
+                        else if (i == 2)
+                            Console.Write("Give me X2\n>> ");
+                        else if (i == 3)
+                            Console.Write("Give me Y2\n>> ");
+
+                        tempArg = Console.ReadLine();
+                        args[i] = Convert.ToInt32(tempArg);
+
+                        // sprawdzamy założenia
+                        if (i == 3 && args[3] >= 0)
+                            Error(sender, e, "Error! Y2 must be negativ intiger");
+                        if (i < 3 && args[i] < 0)
+                        {
+                            string temp = "Wrong Value";
+                            if (i == 0)
+                                temp = "X1";
+                            else if (i == 1)
+                                temp = "Y1";
+                            else if (i == 2)
+                                temp = "X2";
+
+                            Error(sender, e, "Error! " + temp + " can't be negativ intiger");
+                        }
+                        if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
+                            Error(sender, e, "Error! Badly matched coefficients");
+                    }
+                }
+                catch (MyExceptions error)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                    Environment.Exit(1); // zamknięcie konsoli
+                }
+
+                int height = args[1] - args[3]; // - ponieważ y2 musi byc wartoscia ujemna
+                int width = args[0] + args[2];
+
+                //int length = 2 * radius + 1;
+
+                //for (int i = 0; i < length; i++)
+                //{
+                //    for (int j = 0; j < length; j++)
+                //    {
+                //        if (((i - radius) * (i - radius) + (j - radius) * (j - radius)) <= (radius * radius))
+                //            Console.Write("c");
+                //        else
+                //            Console.Write(" ");
+                //    }
+                //    Console.WriteLine(); // działa jak endl
+                //}
             }
         }
 
@@ -183,9 +283,9 @@ namespace ProjektOkienkowy
                     if (Int32.Parse(tempString) == 0) // zamieniamy stringa na inta i sprawdzamy
                         args[data1] = args[data1] * 10;
                     else if (negation == true) // jesli napotkamy negacje to musimy miec w wykladniku potegi i-1 poniewaz jednym znakiem bedzie minus
-                        args[data1] += (Int32.Parse(tempString) * Math.Pow(10, i - 1));
+                        args[data1] = (args[data1] * Math.Pow(10, i - 1)) + Int32.Parse(tempString);
                     else
-                        args[data1] += (Int32.Parse(tempString) * Math.Pow(10, i));
+                        args[data1] = (args[data1] * Math.Pow(10, i)) + Int32.Parse(tempString);
                 }
                 else if (stringValue[i] == ' ') // jesli napotkamy spacje
                 {
@@ -204,7 +304,7 @@ namespace ProjektOkienkowy
                     if (Int32.Parse(tempString) == 0)
                         args[data2] = args[data2] * 10;
                     else
-                        args[data2] += (Int32.Parse(tempString) * Math.Pow(10, j));
+                        args[data2] = (args[data2] * Math.Pow(10, j)) + Int32.Parse(tempString);
 
                     j++;
                 }
@@ -215,54 +315,166 @@ namespace ProjektOkienkowy
 
         private void Parallelogram_Click(object sender, EventArgs e)
         {
-            string message = "Please give me the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
-            string message1 = "Please give me the second X coords and Y coords:", title1 = "Taking second data";
-            object Value, Value1;
+            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
+            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
 
-            double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
-
-            whiteboard.Image = null; // czysczenie textboxa
-
-            Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
-
-            // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
-            if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
-                Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-            else
+            if (resultOfConsWindQuest == DialogResult.Yes)
             {
-                Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
-                if ((string)Value1 == "" || (string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
+                string message = "Please give me the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
+                string message1 = "Please give me the second X coords and Y coords:", title1 = "Taking second data";
+                object Value, Value1;
+
+                double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+
+                whiteboard.Image = null; // czysczenie textboxa
+
+                Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
+
+                // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
+                if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
                     Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
                 else
                 {
-                    string stringValue = (string)Value;
-                    string stringValue1 = (string)Value1;
-
-                    TakeData(sender, e, stringValue, args, 0, 1); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
-                    TakeData(sender, e, stringValue1, args, 2, 3); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
-
-                    // sprawdzam czy podana wartosc jest intem
-                    for (int i = 0; i < stringValue.Length; i++)
+                    Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
+                    if ((string)Value1 == "" || (string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
+                        Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                    else
                     {
-                        // mozna uzyc tylko cyfr lub "-" lub spacji
-                        if (stringValue[i] < 32 || (stringValue[i] > 32 && stringValue[i] < 45 && stringValue[i] > 45 && stringValue[i] < 48) || stringValue[i] > 57)
+                        string stringValue = (string)Value;
+                        string stringValue1 = (string)Value1;
+
+                        TakeData(sender, e, stringValue, args, 0, 1); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
+                        TakeData(sender, e, stringValue1, args, 2, 3); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
+
+                        // sprawdzam czy podana wartosc jest intem
+                        for (int i = 0; i < stringValue.Length; i++)
                         {
-                            Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                            Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            // mozna uzyc tylko cyfr lub "-" lub spacji
+                            if (stringValue[i] < 32 || (stringValue[i] > 32 && stringValue[i] < 45 && stringValue[i] > 45 && stringValue[i] < 48) || stringValue[i] > 57)
+                            {
+                                Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            }
                         }
+
+                        // sprawdzamy założenia
+                        for (int i = 0; i < 4; i++)
+                        {
+                            if (i == 3 && args[3] >= 0)
+                            {
+                                Microsoft.VisualBasic.Interaction.MsgBox("Error! Y2 must be negativ intiger", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            }
+                            if (i < 3 && args[i] < 0)
+                            {
+                                string temp = "Wrong Value";
+                                if (i == 0)
+                                    temp = "X1";
+                                else if (i == 1)
+                                    temp = "Y1";
+                                else if (i == 2)
+                                    temp = "X2";
+
+                                Microsoft.VisualBasic.Interaction.MsgBox("Error! " + temp + " can't be negativ intiger", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            }
+                            if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
+                            {
+                                Microsoft.VisualBasic.Interaction.MsgBox("Error! Badly matched coefficients", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                            }
+                        }
+
+                        int x1_int = Convert.ToInt32(args[0]); // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        int y1_int = Convert.ToInt32(args[1]);
+                        int x2_int = Convert.ToInt32(args[2]);
+                        int y2_int = Convert.ToInt32(args[3]);
+
+                        g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
+                        Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x1_int + x2_int, Y = y1_int + y2_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków równoległoboku
+                        g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                     }
+                }
+            }
+            else if (resultOfConsWindQuest == DialogResult.No)
+            {
+                AllocConsole(); // otwiera konsole
+                double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+                string tempArg;
 
-                    // do wywalenia
-                    Microsoft.VisualBasic.Interaction.MsgBox("DDDDDD " + args[0] + " " + args[1] + " DD" + args[2] + " " + args[3], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "DDDD"); // do wywalenia
+                Console.Clear(); // czysci konsole
 
-                    int x1_int = Convert.ToInt32(args[0]); // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
-                    int y1_int = Convert.ToInt32(args[1]);
-                    int x2_int = Convert.ToInt32(args[2]);
-                    int y2_int = Convert.ToInt32(args[3]);
+                try
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (i == 0)
+                            Console.Write("Give me X1\n>> ");
+                        else if (i == 1)
+                            Console.Write("Give me Y1\n>> ");
+                        else if (i == 2)
+                            Console.Write("Give me X2\n>> ");
+                        else if (i == 3)
+                            Console.Write("Give me Y2\n>> ");
 
-                    g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                    Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x1_int + x2_int, Y = y1_int + y2_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków równoległoboku
-                    g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
+                        tempArg = Console.ReadLine();
+                        args[i] = Convert.ToInt32(tempArg);
+
+                        if (i == 3 && args[3] >= 0)
+                            Error(sender, e, "Error! Y2 must be negativ intiger");
+                        if (i < 3 && args[i] < 0)
+                        {
+                            string temp = "Wrong Value";
+                            if (i == 0)
+                                temp = "X1";
+                            else if (i == 1)
+                                temp = "Y1";
+                            else if (i == 2)
+                                temp = "X2";
+
+                            Error(sender, e, "Error! " + temp + " can't be negativ intiger");
+                        }
+                        if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
+                            Error(sender, e, "Error! Badly matched coefficients");
+                    }
+                }
+                catch (MyExceptions error)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                    Environment.Exit(1); // zamknięcie konsoli
+                }
+                //    a1=x1 a2=y1 b1=x2 b2=y2
+                //    double a_p1 = a2 / static_cast<double>(a1);
+                //    double a_p2 = b2 / static_cast<double>(b1);
+                //    double a_p3 = a2 / static_cast<double>(-b1);
+                //    double a_p4 = b2 / static_cast<double>(-a1);
+                int x1=3,y1=2, x2=2, y2=-2;
+
+                double vec1 = y1 / x1;
+                double vec2 = y2 / x2;
+                double vec3 = y1 / -x2;
+                double vec4 = y2 / -x1;
+
+                //System.
+
+                //wspolczynniki
+                double wsp1 = y1 - x1 * vec2;
+                double wsp2 = y2 - x2 * vec1;
+                double wsp3 = y2 - x2 * vec4;
+                double wsp4 = y1 - x1 * vec3;
+
+
+                for (int y = y1; y >= y2; y--)
+                {
+                    for (int x = 0; x <= x1 + x2; x++)
+                    {
+                        if (y <= vec1 * x || y >= vec2 * x || y <= (vec2 * x + wsp1) || y >= (vec1 * x + wsp2) || y >= vec3 * x || y <= (vec3 * x + wsp4) || y <= vec4 * x || y >= (vec4 * x + wsp3))
+                            Console.Write("p");
+                        else
+                            Console.Write(" ");
+                    }
+                    Console.WriteLine(" ");
                 }
             }
         }
@@ -280,10 +492,38 @@ namespace ProjektOkienkowy
         }
 
         private void whiteboard_Click(object sender, EventArgs e) { }
+
+        private void Error(object sender, EventArgs e, string ErrorMsg)
+        {
+            MyExceptions error;
+            error = new MyExceptions("My Exception Occured");
+            error.ErrorMessage = ErrorMsg;
+            throw error;
+        }
     }
 
     public class MyExceptions : Exception
     {
         public MyExceptions() : base() { }
+        public MyExceptions(string message) : base(message) { }
+
+        private string strErrorMessage;
+        public string ErrorMessage
+        {
+            get
+            {
+                return strErrorMessage;
+            }
+
+            set
+            {
+                strErrorMessage = value;
+            }
+        }
     }
+
 }
+
+
+
+

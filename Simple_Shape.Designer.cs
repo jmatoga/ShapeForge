@@ -124,5 +124,7 @@ namespace ProjektOkienkowy
         private System.Windows.Forms.PictureBox whiteboard;
         private System.Windows.Forms.Button Complex;
     }
+
+   
 }
 
