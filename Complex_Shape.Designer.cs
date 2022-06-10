@@ -35,6 +35,7 @@ namespace ProjektOkienkowy
             this.Triangle = new System.Windows.Forms.Button();
             this.read = new System.Windows.Forms.Button();
             this.Back = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,12 +106,23 @@ namespace ProjektOkienkowy
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.back_button_click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(849, 308);
+            this.label1.Name = "text_complex_shape";
+            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Figures left: " ;
+           
+            // 
             // Complex_Shape
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1020, 582);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.whiteboard);
@@ -124,6 +136,7 @@ namespace ProjektOkienkowy
             this.Text = "Complex Shape";
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -135,5 +148,6 @@ namespace ProjektOkienkowy
         private System.Windows.Forms.Button Triangle;
         private System.Windows.Forms.Button read;
         private System.Windows.Forms.Button Back;
+        private System.Windows.Forms.Label label1;
     }
 }
