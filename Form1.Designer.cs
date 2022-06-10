@@ -34,7 +34,6 @@ namespace ProjektOkienkowy
             this.Parallelogram = new System.Windows.Forms.Button();
             this.whiteboard = new System.Windows.Forms.PictureBox();
             this.Complex = new System.Windows.Forms.Button();
-            this.Clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,24 +95,12 @@ namespace ProjektOkienkowy
             this.Complex.UseVisualStyleBackColor = false;
             this.Complex.Click += new System.EventHandler(this.Complex_Click);
             // 
-            // Clear
-            // 
-            this.Clear.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Clear.Location = new System.Drawing.Point(779, 261);
-            this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(184, 40);
-            this.Clear.TabIndex = 7;
-            this.Clear.Text = "Clear";
-            this.Clear.UseVisualStyleBackColor = true;
-            this.Clear.Click += new System.EventHandler(this.Clear_Click);
-            // 
             // Simple_Shape
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1020, 582);
-            this.Controls.Add(this.Clear);
             this.Controls.Add(this.Complex);
             this.Controls.Add(this.whiteboard);
             this.Controls.Add(this.Parallelogram);
@@ -136,7 +123,6 @@ namespace ProjektOkienkowy
         private System.Windows.Forms.Button Parallelogram;
         private System.Windows.Forms.PictureBox whiteboard;
         private System.Windows.Forms.Button Complex;
-        private System.Windows.Forms.Button Clear;
     }
 }
 
