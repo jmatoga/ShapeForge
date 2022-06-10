@@ -8,12 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic; // aby móc pobierac informajce z okienka wyskakującego
-
+using System.Runtime.InteropServices; // aby móc wyświetlić konsole !!! (trzeba włączyć narzędzia->opcje->debuggowanie->użyj zarządzanego trybu zgodności) jest to forma przestarzała ale inaczej nie działa Console.WriteLine
 
 namespace ProjektOkienkowy
 {
     public partial class Form1 : Form
     {
+        // aby utworzyć konsole
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
+
         private System.Drawing.Graphics g; // tworzenie zmiennej Grapihics do rysowania 
         private System.Drawing.Pen pen = new System.Drawing.Pen(Color.Aqua, 3); // tworzenie dlugopisa do rysowania 
 
@@ -24,37 +29,81 @@ namespace ProjektOkienkowy
 
         private void Circle_click(object sender, EventArgs e)
         {
-            int radius = 0;
 
-            string message = "Please give me the radius:", title = "Taking data", defaultValue = "For example 1";
-            object Value;
-
-            whiteboard.Image = null; // czysczenie textboxa
-
-            Value = Interaction.InputBox(message, title, defaultValue);
-            if ((string)Value == "")
+            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
+            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
+            if (resultOfConsWindQuest == DialogResult.Yes)
             {
-                Value = defaultValue;
-                Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                int radius = 0;
+                string message = "Please give me the radius:", title = "Taking data", defaultValue = "For example 1";
+                object Value;
+
+                whiteboard.Image = null; // czysczenie textboxa
+
+                Value = Interaction.InputBox(message, title, defaultValue);
+                if ((string)Value == "")
+                {
+                    Value = defaultValue;
+                    Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                }
+                else
+                {
+                    string stringValue = (string)Value;
+
+                    // sprawdzam czy podana wartosc jest intem
+                    for (int i = 0; i < stringValue.Length; i++)
+                        if (stringValue[i] < 48 || stringValue[i] > 57)
+                        {
+                            Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                            Environment.Exit(1);
+                        }
+
+                    radius = Int32.Parse(Value.ToString()); // konwertuje z stringa do int i przypisuje do wartosci radius
+                }
+
+                g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
+                g.DrawEllipse(pen, 100, 100, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
             }
-            else
+            else if (resultOfConsWindQuest == DialogResult.No)
             {
-                string stringValue = (string)Value;
+                AllocConsole(); // otwiera konsole
+                int radius = 0;
+                Console.Write("Give me the radius\n>> ");
 
-                // sprawdzam czy podana wartosc jest intem
-                for (int i = 0; i < stringValue.Length; i++)
-                    if (stringValue[i] < 48 || stringValue[i] > 57)
+                try
+                {
+                    radius = Console.Read() - 48; // -48 bo kod ascii
+
+                    if (radius <= 0)
                     {
-                        Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                        Environment.Exit(1);
+                        MyExceptions error;
+                        error = new MyExceptions();
+                        throw error;
                     }
+                }
+                catch
+                {
+                    Console.WriteLine("Error! Radius can't be zero!");
+                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                    Environment.Exit(1); // zamknięcie konsoli
+                }
 
-                radius = Int32.Parse(Value.ToString()); // konwertuje z stringa do int i przypisuje do wartosci radius
+                int length = 2 * radius + 1;
+
+                for (int i = 0; i < length; i++)
+                {
+                    for (int j = 0; j < length; j++)
+                    {
+                        if (((i - radius) * (i - radius) + (j - radius) * (j - radius)) <= (radius * radius))
+                            Console.Write("c");
+                        else
+                            Console.Write(" ");
+                    }
+                    Console.WriteLine(); // działa jak endl
+                }
             }
-
-            g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-            g.DrawEllipse(pen, 100, 100, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
         }
+
         private void Triangle_Click(object sender, EventArgs e)
         {
             string message = "Please give me the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
@@ -158,16 +207,59 @@ namespace ProjektOkienkowy
             if (negation == true)
                 args[data2] = -args[data2];
         }
-        private void Clear_Click(object sender, EventArgs e)
-        {
-            whiteboard.Image = null;
-        }
 
         private void Parallelogram_Click(object sender, EventArgs e)
         {
-            g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-            Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = 120, Y = 50 }, new Point { X = 190, Y = 50 }, new Point { X = 170, Y = 100 } }; // ustawianie wierzchołków równoległoboku
-            g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku równoległobok bo 4 wierzchołki)
+            string message = "Please give me the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
+            string message1 = "Please give me the second X coords and Y coords:", title1 = "Taking second data";
+            object Value, Value1;
+
+            double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+
+            whiteboard.Image = null; // czysczenie textboxa
+
+            Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
+
+            // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
+            if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
+                Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+            else
+            {
+                Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
+                if ((string)Value1 == "" || (string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
+                    Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                else
+                {
+                    string stringValue = (string)Value;
+                    string stringValue1 = (string)Value1;
+
+                    TakeData(sender, e, stringValue, args, 0, 1); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
+                    TakeData(sender, e, stringValue1, args, 2, 3); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
+
+                    // sprawdzam czy podana wartosc jest intem
+                    for (int i = 0; i < stringValue.Length; i++)
+                    {
+                        // mozna uzyc tylko cyfr lub "-" lub spacji
+                        if (stringValue[i] < 32 || (stringValue[i] > 32 && stringValue[i] < 45 && stringValue[i] > 45 && stringValue[i] < 48) || stringValue[i] > 57)
+                        {
+                            Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                            Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                        }
+                    }
+
+                    // do wywalenia
+                    Microsoft.VisualBasic.Interaction.MsgBox("DDDDDD " + args[0] + " " + args[1] + " DD" + args[2] + " " + args[3], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "DDDD"); // do wywalenia
+
+                    int x1_int = Convert.ToInt32(args[0]); // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                    int y1_int = Convert.ToInt32(args[1]);
+                    int x2_int = Convert.ToInt32(args[2]);
+                    int y2_int = Convert.ToInt32(args[3]);
+
+                    g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
+                    Point[] points = new Point[] { new Point { X = 100, Y = 100 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x1_int + x2_int, Y = y1_int + y2_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków równoległoboku
+                    g.DrawPolygon(pen, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
+                }
+            }
         }
 
         private void Complex_Click(object sender, EventArgs e)
@@ -176,6 +268,17 @@ namespace ProjektOkienkowy
             complex_shape_window.Show();
             this.Hide();
         }
+
+        public void Clear_Click(object sender, EventArgs e)
+        {
+            whiteboard.Image = null;
+        }
+
         private void whiteboard_Click(object sender, EventArgs e) { }
+    }
+
+    public class MyExceptions : Exception
+    {
+        public MyExceptions() : base() { }
     }
 }
