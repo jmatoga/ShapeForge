@@ -444,37 +444,30 @@ namespace ProjektOkienkowy
                     Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
                     Environment.Exit(1); // zamknięcie konsoli
                 }
-                //    a1=x1 a2=y1 b1=x2 b2=y2
-                //    double a_p1 = a2 / static_cast<double>(a1);
-                //    double a_p2 = b2 / static_cast<double>(b1);
-                //    double a_p3 = a2 / static_cast<double>(-b1);
-                //    double a_p4 = b2 / static_cast<double>(-a1);
-                int x1=3,y1=2, x2=2, y2=-2;
+            
+                int x1 = 3, y1 = 2, x2 = 2, y2 = -2; //!!!
 
-                double vec1 = y1 / x1;
-                double vec2 = y2 / x2;
-                double vec3 = y1 / -x2;
-                double vec4 = y2 / -x1;
-
-                //System.
+                double vec1 = y1 / Convert.ToDouble(x1);
+                double vec2 = y2 / Convert.ToDouble(x2);
+                double vec3 = y1 / Convert.ToDouble(-x2);
+                double vec4 = y2 / Convert.ToDouble(-x1);
 
                 //wspolczynniki
-                double wsp1 = y1 - x1 * vec2;
-                double wsp2 = y2 - x2 * vec1;
-                double wsp3 = y2 - x2 * vec4;
-                double wsp4 = y1 - x1 * vec3;
-
+                double wsp1 = Convert.ToDouble(y1 - x1 * vec2);
+                double wsp2 = Convert.ToDouble(y2 - x2 * vec1);
+                double wsp3 = Convert.ToDouble(y2 - x2 * vec4);
+                double wsp4 = Convert.ToDouble(y1 - x1 * vec3);
 
                 for (int y = y1; y >= y2; y--)
                 {
                     for (int x = 0; x <= x1 + x2; x++)
                     {
-                        if (y <= vec1 * x || y >= vec2 * x || y <= (vec2 * x + wsp1) || y >= (vec1 * x + wsp2) || y >= vec3 * x || y <= (vec3 * x + wsp4) || y <= vec4 * x || y >= (vec4 * x + wsp3))
-                            Console.Write("p");
+                        if (y <= vec1 * x && y >= vec2 * x && y <= (vec2 * x + wsp1) && y >= (vec1 * x + wsp2) && y >= vec3 * x && y <= (vec3 * x + wsp4) && y <= vec4 * x && y >= (vec4 * x + wsp3))
+                            Console.Write("P");
                         else
-                            Console.Write(" ");
+                            Console.Write("u");
                     }
-                    Console.WriteLine(" ");
+                    Console.WriteLine();
                 }
             }
         }
