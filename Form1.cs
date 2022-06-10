@@ -12,7 +12,7 @@ using System.Runtime.InteropServices; // aby móc wyświetlić konsole !!! (trze
 
 namespace ProjektOkienkowy
 {
-    public partial class Form1 : Form
+    public partial class Simple_Shape : Form
     {
         // aby utworzyć konsole
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -22,7 +22,7 @@ namespace ProjektOkienkowy
         private System.Drawing.Graphics g; // tworzenie zmiennej Grapihics do rysowania 
         private System.Drawing.Pen pen = new System.Drawing.Pen(Color.Aqua, 3); // tworzenie dlugopisa do rysowania 
 
-        public Form1()
+        public Simple_Shape()
         {
             InitializeComponent(); // to sie robi samo - metoda wymagana do obsługi projektanta 
         }
@@ -268,7 +268,7 @@ namespace ProjektOkienkowy
 
         private void Complex_Click(object sender, EventArgs e)
         {
-            Form2 complex_shape_window = new Form2();
+            Complex_Shape complex_shape_window = new Complex_Shape();
             complex_shape_window.Show();
             this.Hide();
         }

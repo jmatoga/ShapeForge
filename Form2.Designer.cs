@@ -1,7 +1,7 @@
 ﻿
 namespace ProjektOkienkowy
 {
-    partial class Form2
+    partial class Complex_Shape
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,6 @@ namespace ProjektOkienkowy
         private void InitializeComponent()
         {
             this.Clear = new System.Windows.Forms.Button();
-            this.Complex = new System.Windows.Forms.Button();
             this.whiteboard = new System.Windows.Forms.PictureBox();
             this.Parallelogram = new System.Windows.Forms.Button();
             this.Triangle = new System.Windows.Forms.Button();
@@ -44,30 +43,19 @@ namespace ProjektOkienkowy
             // Clear
             // 
             this.Clear.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Clear.Location = new System.Drawing.Point(834, 247);
+            this.Clear.Location = new System.Drawing.Point(779, 192);
             this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(174, 34);
+            this.Clear.Size = new System.Drawing.Size(184, 40);
             this.Clear.TabIndex = 13;
             this.Clear.Text = "Clear";
             this.Clear.UseVisualStyleBackColor = true;
             // 
-            // Complex
-            // 
-            this.Complex.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.Complex.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Complex.Location = new System.Drawing.Point(834, 178);
-            this.Complex.Name = "Complex";
-            this.Complex.Size = new System.Drawing.Size(174, 48);
-            this.Complex.TabIndex = 12;
-            this.Complex.Text = "Complex_Shape";
-            this.Complex.UseVisualStyleBackColor = false;
-            // 
             // whiteboard
             // 
             this.whiteboard.BackColor = System.Drawing.Color.White;
-            this.whiteboard.Location = new System.Drawing.Point(102, 12);
+            this.whiteboard.Location = new System.Drawing.Point(24, 12);
             this.whiteboard.Name = "whiteboard";
-            this.whiteboard.Size = new System.Drawing.Size(695, 552);
+            this.whiteboard.Size = new System.Drawing.Size(700, 555);
             this.whiteboard.TabIndex = 11;
             this.whiteboard.TabStop = false;
             // 
@@ -75,9 +63,9 @@ namespace ProjektOkienkowy
             // 
             this.Parallelogram.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Parallelogram.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Parallelogram.Location = new System.Drawing.Point(834, 123);
+            this.Parallelogram.Location = new System.Drawing.Point(779, 135);
             this.Parallelogram.Name = "Parallelogram";
-            this.Parallelogram.Size = new System.Drawing.Size(174, 49);
+            this.Parallelogram.Size = new System.Drawing.Size(184, 51);
             this.Parallelogram.TabIndex = 10;
             this.Parallelogram.Text = "Parallelogram";
             this.Parallelogram.UseVisualStyleBackColor = false;
@@ -86,9 +74,9 @@ namespace ProjektOkienkowy
             // 
             this.Triangle.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Triangle.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Triangle.Location = new System.Drawing.Point(834, 69);
+            this.Triangle.Location = new System.Drawing.Point(779, 78);
             this.Triangle.Name = "Triangle";
-            this.Triangle.Size = new System.Drawing.Size(174, 48);
+            this.Triangle.Size = new System.Drawing.Size(184, 51);
             this.Triangle.TabIndex = 9;
             this.Triangle.Text = "Triangle";
             this.Triangle.UseVisualStyleBackColor = false;
@@ -97,9 +85,9 @@ namespace ProjektOkienkowy
             // 
             this.read.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.read.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.read.Location = new System.Drawing.Point(834, 18);
+            this.read.Location = new System.Drawing.Point(779, 21);
             this.read.Name = "read";
-            this.read.Size = new System.Drawing.Size(174, 45);
+            this.read.Size = new System.Drawing.Size(184, 51);
             this.read.TabIndex = 8;
             this.read.Text = "Circle";
             this.read.UseVisualStyleBackColor = false;
@@ -108,33 +96,33 @@ namespace ProjektOkienkowy
             // Back
             // 
             this.Back.Font = new System.Drawing.Font("Century Gothic", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Back.Location = new System.Drawing.Point(12, 12);
+            this.Back.Location = new System.Drawing.Point(779, 516);
             this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(64, 61);
+            this.Back.Size = new System.Drawing.Size(184, 51);
             this.Back.TabIndex = 14;
-            this.Back.Text = "back";
+            this.Back.Text = "Back to Simple Shape";
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.back_button_click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(858, 375);
+            this.textBox1.Location = new System.Drawing.Point(779, 373);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(127, 22);
+            this.textBox1.Size = new System.Drawing.Size(184, 22);
             this.textBox1.TabIndex = 15;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(851, 301);
+            this.label1.Location = new System.Drawing.Point(807, 310);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(134, 60);
             this.label1.TabIndex = 16;
             this.label1.Text = "Enter how many\r\nfigures you want \r\nto draw:\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Form2
+            // Complex_Shape
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -144,7 +132,6 @@ namespace ProjektOkienkowy
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.Clear);
-            this.Controls.Add(this.Complex);
             this.Controls.Add(this.whiteboard);
             this.Controls.Add(this.Parallelogram);
             this.Controls.Add(this.Triangle);
@@ -152,8 +139,8 @@ namespace ProjektOkienkowy
             this.Location = new System.Drawing.Point(-50, -50);
             this.MaximumSize = new System.Drawing.Size(1038, 629);
             this.MinimumSize = new System.Drawing.Size(1038, 629);
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "Complex_Shape";
+            this.Text = "Complex Shape";
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -163,7 +150,6 @@ namespace ProjektOkienkowy
         #endregion
 
         private System.Windows.Forms.Button Clear;
-        private System.Windows.Forms.Button Complex;
         private System.Windows.Forms.PictureBox whiteboard;
         private System.Windows.Forms.Button Parallelogram;
         private System.Windows.Forms.Button Triangle;

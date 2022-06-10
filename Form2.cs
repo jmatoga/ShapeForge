@@ -10,18 +10,18 @@ using System.Windows.Forms;
 
 namespace ProjektOkienkowy
 {
-    public partial class Form2 : Form
+    public partial class Complex_Shape : Form
     {
         string data = "";
-        public Form2()
+        public Complex_Shape()
         {
             InitializeComponent();
         }
 
         private void back_button_click(object sender, EventArgs e)
         {
-            Form1 back_to_form1 = new Form1();
-            back_to_form1.Show();
+            Simple_Shape back_to_Simple_Shape = new Simple_Shape();
+            back_to_Simple_Shape.Show();
             this.Hide();
         }
       

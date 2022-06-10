@@ -1,7 +1,7 @@
 ﻿
 namespace ProjektOkienkowy
 {
-    partial class Form1
+    partial class Simple_Shape
     {
         /// <summary>
         /// Wymagana zmienna projektanta.
@@ -42,9 +42,9 @@ namespace ProjektOkienkowy
             // 
             this.Circle.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Circle.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Circle.Location = new System.Drawing.Point(814, 26);
+            this.Circle.Location = new System.Drawing.Point(779, 26);
             this.Circle.Name = "Circle";
-            this.Circle.Size = new System.Drawing.Size(172, 46);
+            this.Circle.Size = new System.Drawing.Size(184, 51);
             this.Circle.TabIndex = 0;
             this.Circle.Text = "Circle";
             this.Circle.UseVisualStyleBackColor = false;
@@ -54,9 +54,9 @@ namespace ProjektOkienkowy
             // 
             this.Triangle.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Triangle.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Triangle.Location = new System.Drawing.Point(814, 78);
+            this.Triangle.Location = new System.Drawing.Point(779, 78);
             this.Triangle.Name = "Triangle";
-            this.Triangle.Size = new System.Drawing.Size(172, 51);
+            this.Triangle.Size = new System.Drawing.Size(184, 51);
             this.Triangle.TabIndex = 2;
             this.Triangle.Text = "Triangle";
             this.Triangle.UseVisualStyleBackColor = false;
@@ -66,9 +66,9 @@ namespace ProjektOkienkowy
             // 
             this.Parallelogram.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Parallelogram.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Parallelogram.Location = new System.Drawing.Point(814, 135);
+            this.Parallelogram.Location = new System.Drawing.Point(779, 135);
             this.Parallelogram.Name = "Parallelogram";
-            this.Parallelogram.Size = new System.Drawing.Size(172, 49);
+            this.Parallelogram.Size = new System.Drawing.Size(184, 51);
             this.Parallelogram.TabIndex = 3;
             this.Parallelogram.Text = "Parallelogram";
             this.Parallelogram.UseVisualStyleBackColor = false;
@@ -79,7 +79,7 @@ namespace ProjektOkienkowy
             this.whiteboard.BackColor = System.Drawing.Color.White;
             this.whiteboard.Location = new System.Drawing.Point(24, 12);
             this.whiteboard.Name = "whiteboard";
-            this.whiteboard.Size = new System.Drawing.Size(718, 558);
+            this.whiteboard.Size = new System.Drawing.Size(700, 555);
             this.whiteboard.TabIndex = 5;
             this.whiteboard.TabStop = false;
             this.whiteboard.Click += new System.EventHandler(this.whiteboard_Click);
@@ -88,9 +88,9 @@ namespace ProjektOkienkowy
             // 
             this.Complex.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Complex.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Complex.Location = new System.Drawing.Point(814, 190);
+            this.Complex.Location = new System.Drawing.Point(779, 190);
             this.Complex.Name = "Complex";
-            this.Complex.Size = new System.Drawing.Size(172, 48);
+            this.Complex.Size = new System.Drawing.Size(184, 51);
             this.Complex.TabIndex = 6;
             this.Complex.Text = "Complex_Shape";
             this.Complex.UseVisualStyleBackColor = false;
@@ -99,15 +99,15 @@ namespace ProjektOkienkowy
             // Clear
             // 
             this.Clear.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Clear.Location = new System.Drawing.Point(814, 264);
+            this.Clear.Location = new System.Drawing.Point(779, 261);
             this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(172, 34);
+            this.Clear.Size = new System.Drawing.Size(184, 40);
             this.Clear.TabIndex = 7;
             this.Clear.Text = "Clear";
             this.Clear.UseVisualStyleBackColor = true;
             this.Clear.Click += new System.EventHandler(this.Clear_Click);
             // 
-            // Form1
+            // Simple_Shape
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -122,8 +122,8 @@ namespace ProjektOkienkowy
             this.Location = new System.Drawing.Point(50, 50);
             this.MaximumSize = new System.Drawing.Size(1038, 629);
             this.MinimumSize = new System.Drawing.Size(1038, 629);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Simple_Shape";
+            this.Text = "Simple Shape";
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).EndInit();
             this.ResumeLayout(false);
 
