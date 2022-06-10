@@ -68,11 +68,17 @@ namespace ProjektOkienkowy
             {
                 AllocConsole(); // otwiera konsole
                 int radius = 0;
+                string tempRadius;
+
+                Console.Clear(); // czysci konsole
                 Console.Write("Give me the radius\n>> ");
+
+                tempRadius = Console.ReadLine();
+                radius = Convert.ToInt32(tempRadius);
 
                 try
                 {
-                    radius = Console.Read() - 48; // -48 bo kod ascii
+                    // radius = Console.Read() - 48; // -48 bo kod ascii
 
                     if (radius <= 0)
                     {
