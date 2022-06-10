@@ -35,15 +35,13 @@ namespace ProjektOkienkowy
             this.Triangle = new System.Windows.Forms.Button();
             this.read = new System.Windows.Forms.Button();
             this.Back = new System.Windows.Forms.Button();
-            this.enter_how_many_figures = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).BeginInit();
             this.SuspendLayout();
             // 
             // Clear
             // 
             this.Clear.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Clear.Location = new System.Drawing.Point(779, 192);
+            this.Clear.Location = new System.Drawing.Point(779, 202);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(184, 40);
             this.Clear.TabIndex = 13;
@@ -104,32 +102,12 @@ namespace ProjektOkienkowy
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.back_button_click);
             // 
-            // enter_how_many_figures
-            // 
-            this.enter_how_many_figures.Location = new System.Drawing.Point(779, 373);
-            this.enter_how_many_figures.Name = "enter_how_many_figures";
-            this.enter_how_many_figures.Size = new System.Drawing.Size(184, 22);
-            this.enter_how_many_figures.TabIndex = 15;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(807, 310);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 60);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Enter how many\r\nfigures you want \r\nto draw:\r\n";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Complex_Shape
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1020, 582);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.enter_how_many_figures);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.whiteboard);
@@ -143,7 +121,6 @@ namespace ProjektOkienkowy
             this.Text = "Complex Shape";
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -155,7 +132,5 @@ namespace ProjektOkienkowy
         private System.Windows.Forms.Button Triangle;
         private System.Windows.Forms.Button read;
         private System.Windows.Forms.Button Back;
-        private System.Windows.Forms.TextBox enter_how_many_figures;
-        private System.Windows.Forms.Label label1;
     }
 }
