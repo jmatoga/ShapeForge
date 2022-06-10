@@ -73,12 +73,10 @@ namespace ProjektOkienkowy
                 Console.Clear(); // czysci konsole
                 Console.Write("Give me the radius\n>> ");
 
-                tempRadius = Console.ReadLine();
-                radius = Convert.ToInt32(tempRadius);
-
                 try
                 {
-                    // radius = Console.Read() - 48; // -48 bo kod ascii
+                    tempRadius = Console.ReadLine();
+                    radius = Convert.ToInt32(tempRadius);
 
                     if (radius <= 0)
                     {
