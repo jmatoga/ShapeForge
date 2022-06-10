@@ -67,6 +67,7 @@ namespace ProjektOkienkowy
             this.Parallelogram.TabIndex = 10;
             this.Parallelogram.Text = "Parallelogram";
             this.Parallelogram.UseVisualStyleBackColor = false;
+            this.Parallelogram.Click += new System.EventHandler(this.Parallelogram_Click);
             // 
             // Triangle
             // 
@@ -78,6 +79,7 @@ namespace ProjektOkienkowy
             this.Triangle.TabIndex = 9;
             this.Triangle.Text = "Triangle";
             this.Triangle.UseVisualStyleBackColor = false;
+            this.Triangle.Click += new System.EventHandler(this.Triangle_Click);
             // 
             // read
             // 

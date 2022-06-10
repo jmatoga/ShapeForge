@@ -72,7 +72,7 @@ namespace ProjektOkienkowy
                 string tempRadius;
 
                 Console.Clear(); // czysci konsole
-                Console.Write("Give me the radius\n>> ");
+                Console.Write("Enter the radius\n>> ");
 
                 try
                 {
