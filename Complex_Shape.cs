@@ -25,7 +25,7 @@ namespace ProjektOkienkowy
         private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3); // tworzenie dlugopisa do rysowania 
         private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3); // tworzenie dlugopisa do rysowania 
         private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3); // tworzenie dlugopisa do rysowania 
-        int new_beginning = 0;//zeby byly obok siebie nowy poczatek wspolrzednej
+        int new_beginning_x = 0;//zeby byly obok siebie nowy poczatek wspolrzednej
         int new_beginning_y = 0;//nowy pozatek dla y
         int ifClicked = 0;//licznik do ile razy klikniete byl guzik
 
@@ -88,15 +88,23 @@ namespace ProjektOkienkowy
                     }
                     if (ifClicked > 0)
                     {
-                        new_beginning += radius;
+
+                        int beginning_y = (new_beginning_y -( radius / 2));
                         g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                        g.DrawEllipse(pen_circle, new_beginning, new_beginning, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+                        g.DrawEllipse(pen_circle, new_beginning_x, beginning_y, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+                        //zeby nowa figura byla na srednicy a nie kwadracie
+                        new_beginning_x +=  radius;//x powiekoszne o sreddnice
+                        new_beginning_y=beginning_y+radius/2;//zeby bylo w srodku kola
+
                     }
                     else
                     {
-                        new_beginning += radius;
+                        new_beginning_x+= radius;
                         g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                         g.DrawEllipse(pen_circle, 0,0, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+                        //zeby nowa figura byla na srednicy a nie kwadracie
+                        new_beginning_x =  radius;
+                        new_beginning_y = radius/2 ;
                     }
                         count--;
                         label1.Text = "Figures left: " + count;
@@ -212,15 +220,18 @@ namespace ProjektOkienkowy
                         {
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                             Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków trójkąta
+                            new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
+                            new_beginning_y = points[2].Y;
                             g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki )
                         }
                         else
                         {
-                            new_beginning += x2_int;
-                            new_beginning_y +=y2_int;
+                          
                            g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                            Point[] points = new Point[] { new Point { X = new_beginning, Y = new_beginning_y }, new Point { X = x1_int+new_beginning, Y = y1_int+new_beginning_y}, new Point { X = x2_int+new_beginning, Y = y2_int +new_beginning_y} }; // ustawianie wierzchołków trójkąta
+                            Point[] points = new Point[] { new Point { X = new_beginning_x, Y = new_beginning_y }, new Point { X = new_beginning_x+ x1_int, Y = new_beginning_y+ y1_int }, new Point { X = new_beginning_x+ x2_int, Y = new_beginning_y+y2_int } }; // ustawianie wierzchołków trójkąta
                             g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
+                            new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
+                            new_beginning_y = points[2].Y;
                         }
                         count--;
                         label1.Text = "Figures left: " + count;
@@ -339,17 +350,20 @@ namespace ProjektOkienkowy
                       
                         if(ifClicked>0)
                         {
-                            new_beginning += x1_int + x2_int;
-                            new_beginning_y += y1_int + y2_int;
+                            
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                            Point[] points = new Point[] { new Point { X =new_beginning, Y = new_beginning_y }, new Point { X = x1_int+new_beginning, Y = y1_int+new_beginning_y}, new Point { X = x1_int + x2_int+new_beginning, Y = y1_int + y2_int +new_beginning_y}, new Point { X = x2_int+new_beginning, Y = y2_int+new_beginning_y } }; // ustawianie wierzchołków równoległoboku
+                            Point[] points = new Point[] { new Point { X =new_beginning_x, Y = new_beginning_y }, new Point { X = new_beginning_x+x1_int, Y = new_beginning_y+ y1_int }, new Point { X = new_beginning_x+ x1_int + x2_int, Y = new_beginning_y+y1_int + y2_int }, new Point { X = new_beginning_x+x2_int, Y = new_beginning_y+ y2_int } }; // ustawianie wierzchołków równoległoboku
                             g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku rownoleglobok bo 4 wierzchołki)
+                            new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
+                            new_beginning_y = points[2].Y;
                         }
                        else
                         {
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                            Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x1_int + x2_int, Y = y1_int + y2_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków równoległoboku
+                            Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = new_beginning_x+x1_int, Y = new_beginning_y+y1_int }, new Point { X = new_beginning_x+x1_int + x2_int, Y = new_beginning_y+y1_int + y2_int }, new Point { X = new_beginning_x+x2_int, Y = new_beginning_y+ y2_int } }; // ustawianie wierzchołków równoległoboku
                             g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku rownoleglobok bo 4 wierzchołki)
+                            new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
+                            new_beginning_y = points[2].Y;
                         }
                         count--;
                         label1.Text = "Figures left: " + count;
@@ -366,7 +380,7 @@ namespace ProjektOkienkowy
             count = 5;
             label1.Text = "Figures left: " + count;
             ifClicked = 0;
-            new_beginning=0;
+            new_beginning_x=0;
             new_beginning_y =0;
             Parallelogram.Visible = true;
             read.Visible = true;
