@@ -43,8 +43,10 @@ namespace ProjektOkienkowy
 
                 Value = Interaction.InputBox(message, title, defaultValue);
 
-                if ((string)Value == "")
+                // jesli uzytkownik kliknie samo enter czyli bedzie defaultValue 
+                if ((string)Value == defaultValue)
                     Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                else if ((string)Value == "") { } // gdy sie kliknie cancel
                 else
                 {
                     string stringValue = (string)Value;
@@ -124,9 +126,10 @@ namespace ProjektOkienkowy
 
                 Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
 
-                // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
-                if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
+                // jesli uzytkownik kliknie samo enter czyli bedzie defaultValue 
+                if ((string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
                     Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                else if ((string)Value == "") { } // gdy sie kliknie cancel
                 else
                 {
                     Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
@@ -330,9 +333,10 @@ namespace ProjektOkienkowy
 
                 Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
 
-                // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
-                if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
+                // jesli uzytkownik kliknie samo enter czyli bedzie defaultValue
+                if ((string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
                     Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                else if ((string)Value == "") { } // gdy sie kliknie cancel
                 else
                 {
                     Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
@@ -444,7 +448,7 @@ namespace ProjektOkienkowy
                     Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
                     Environment.Exit(1); // zamknięcie konsoli
                 }
-            
+
                 int x1 = 3, y1 = 2, x2 = 2, y2 = -2; //!!!
 
                 double vec1 = y1 / Convert.ToDouble(x1);
@@ -514,9 +518,4 @@ namespace ProjektOkienkowy
             }
         }
     }
-
 }
-
-
-
-
