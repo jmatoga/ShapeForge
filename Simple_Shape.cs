@@ -520,11 +520,6 @@ namespace ProjektOkienkowy
             }
         }
 
-        public void Clear_Click(object sender, EventArgs e)
-        {
-            whiteboard.Image = null;
-        }
-
         private void Error(object sender, EventArgs e, string ErrorMsg)
         {
             MyExceptions error;
