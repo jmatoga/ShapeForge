@@ -23,9 +23,9 @@ namespace ProjektOkienkowy
         private System.Drawing.Graphics g; // tworzenie zmiennej Grapihics do rysowania 
 
         // tworzenie dlugopisów do rysowania 
-        private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3); 
-        private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3); 
-        private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3); 
+        private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3);
+        private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3);
+        private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3);
 
         public Simple_Shape()
         {
@@ -189,7 +189,7 @@ namespace ProjektOkienkowy
                         }
 
                         // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
-                        int x1_int = Convert.ToInt32(args[0]); 
+                        int x1_int = Convert.ToInt32(args[0]);
                         int y1_int = Convert.ToInt32(args[1]);
                         int x2_int = Convert.ToInt32(args[2]);
                         int y2_int = Convert.ToInt32(args[3]);
@@ -393,7 +393,7 @@ namespace ProjektOkienkowy
                         }
 
                         // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
-                        int x1_int = Convert.ToInt32(args[0]); 
+                        int x1_int = Convert.ToInt32(args[0]);
                         int y1_int = Convert.ToInt32(args[1]);
                         int x2_int = Convert.ToInt32(args[2]);
                         int y2_int = Convert.ToInt32(args[3]);
@@ -482,43 +482,9 @@ namespace ProjektOkienkowy
 
         private void Complex_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
-            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
-
-            if (resultOfConsWindQuest == DialogResult.Yes)
-            {
-                Complex_Shape complex_shape_window = new Complex_Shape();
-                complex_shape_window.Show();
-                this.Hide();
-            }
-            else if (resultOfConsWindQuest == DialogResult.No)
-            {
-                AllocConsole(); // otwiera konsole
-                int radius = 0;
-                string tempRadius;
-
-                Console.Clear(); // czysci konsole
-                Console.Write("Enter the radius\n>> ");
-
-                try
-                {
-                    tempRadius = Console.ReadLine();
-                    radius = Convert.ToInt32(tempRadius);
-
-                    if (radius <= 0)
-                    {
-                        MyExceptions error;
-                        error = new MyExceptions();
-                        throw error;
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("Error! Radius can't be zero!");
-                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                    Environment.Exit(1); // zamknięcie konsoli
-                }
-            }
+            Complex_Shape complex_shape_window = new Complex_Shape();
+            complex_shape_window.Show();
+            this.Hide();
         }
 
         private void Error(object sender, EventArgs e, string ErrorMsg)

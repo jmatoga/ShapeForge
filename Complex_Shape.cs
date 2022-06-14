@@ -13,7 +13,7 @@ using System.Runtime.InteropServices; // aby móc wyświetlić konsole !!! (trze
 namespace ProjektOkienkowy
 {
     //tworzenie drugiego okienka complex shape
-    public partial class Complex_Shape : Form 
+    public partial class Complex_Shape : Form
     {
         // aby utworzyć konsole
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -24,9 +24,9 @@ namespace ProjektOkienkowy
         public int count = 5; // licznik ile pozostało figur do narysowania - 5 bo ma być maksymalnie 5 figur
 
         // tworzenie dlugopisów do rysowania 
-        private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3); 
-        private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3); 
-        private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3); 
+        private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3);
+        private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3);
+        private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3);
 
         int new_beginning_x = 0; // zeby byly obok siebie nowy początek wspolrzednej
         int new_beginning_y = 0; // nowy początek dla y
@@ -35,6 +35,28 @@ namespace ProjektOkienkowy
         public Complex_Shape()
         {
             InitializeComponent();
+            ifWindowOrConsole(); // aby zapytac sie czy uzytkownik chce dzialac w konsoli czy okienkowo przy przejsciu na complex shape
+        }
+
+        private void ifWindowOrConsole()
+        {
+            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
+            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
+
+            if (resultOfConsWindQuest == DialogResult.Yes)
+            {
+                whiteboard.Image = null;
+                count = 5;
+                label1.Text = "Figures left: " + count;
+                ifClicked = 0;
+                new_beginning_x = 0;
+                new_beginning_y = 0;
+                Parallelogram.Visible = true;
+                read.Visible = true;
+                Triangle.Visible = true;
+            }
+            else if (resultOfConsWindQuest == DialogResult.No)
+                Console_Complex_Shape();
         }
 
         private void back_button_click(object sender, EventArgs e)
@@ -78,7 +100,7 @@ namespace ProjektOkienkowy
                     int beginning_y = (new_beginning_y - (radius / 2));
                     g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                     g.DrawEllipse(pen_circle, new_beginning_x, beginning_y, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
-                  
+
                     // zeby nowa figura byla na srednicy a nie kwadracie
                     new_beginning_x += radius; // x powiekoszne o sreddnice
                     new_beginning_y = beginning_y + radius / 2; // zeby bylo w srodku kola
@@ -193,7 +215,7 @@ namespace ProjektOkienkowy
                         }
 
                         // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
-                        int x1_int = Convert.ToInt32(args[0]); 
+                        int x1_int = Convert.ToInt32(args[0]);
                         int y1_int = Convert.ToInt32(args[1]);
                         int x2_int = Convert.ToInt32(args[2]);
                         int y2_int = Convert.ToInt32(args[3]);
@@ -317,7 +339,7 @@ namespace ProjektOkienkowy
                         }
 
                         // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
-                        int x1_int = Convert.ToInt32(args[0]); 
+                        int x1_int = Convert.ToInt32(args[0]);
                         int y1_int = Convert.ToInt32(args[1]);
                         int x2_int = Convert.ToInt32(args[2]);
                         int y2_int = Convert.ToInt32(args[3]);
@@ -346,11 +368,94 @@ namespace ProjektOkienkowy
             }
         }
 
+        public void Console_Complex_Shape()
+        {
+            bool ifContinue = true;
+
+            while (ifContinue)
+            {
+                AllocConsole(); // otwiera konsole
+
+                int numberOfFigures = 0, option = 0;
+                string tempString;
+
+                Console.Clear(); // czysci konsole
+                Console.Write("Enter the number of figures you want to draw (max 5)\n>> ");
+
+                try
+                {
+                    tempString = Console.ReadLine();
+                    numberOfFigures = Convert.ToInt32(tempString);
+
+                    if (numberOfFigures <= 0)
+                    {
+                        MyExceptions error;
+                        error = new MyExceptions("My Exception Occured");
+                        error.ErrorMessage = "Error! Number of figgures to draw can't be zero or below zero!";
+                        throw error;
+                    }
+                    if (numberOfFigures > 5)
+                    {
+                        MyExceptions error;
+                        error = new MyExceptions("My Exception Occured");
+                        error.ErrorMessage = "Error! Number of figgures to draw can't be more than 5!";
+                        throw error;
+                    }
+
+                    for (int i = 0; i < numberOfFigures; i++)
+                    {
+                        Console.Write("Enter " + (i + 1) + " figure\n1. Add circle\n2.Add triangle\n3. Add Parallelogram\n>> ");
+                        tempString = Console.ReadLine();
+                        option = Convert.ToInt32(tempString);
+
+                        while (option != 1 && option != 2 && option != 3)
+                        {
+                            Console.Write("Enter the number from 1 to 3.\n>> ");
+                            tempString = Console.ReadLine();
+                            option = Convert.ToInt32(tempString);
+                        }
+
+                        switch (option)
+                        {
+                            case 1:
+                                //  drawCircle();
+                                break;
+                            case 2:
+                                //  drawTriangle();
+                                break;
+                            case 3:
+                                //  drawParallelogram();
+                                break;
+                        }
+                    }
+
+                    Console.Write("\nDo you want to continue in console? Y - yes  N - no\n>> ");
+                    tempString = Console.ReadLine();
+
+                    if (tempString[0] == 'N' || tempString[0] == 'n')
+                        ifContinue = false;
+                    if (tempString[0] != 'Y' && tempString[0] != 'N' && tempString[0] != 'y' && tempString[0] != 'n')
+                    {
+                        MyExceptions error;
+                        error = new MyExceptions("My Exception Occured");
+                        error.ErrorMessage = "Error! Next time choose Y - yes or N - no!";
+                        throw error;
+                    }
+                }
+                catch (MyExceptions error)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                    Environment.Exit(1); // zamknięcie konsoli
+                }
+            }
+        }
+
         private void Clear_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
             resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
-            
+
             if (resultOfConsWindQuest == DialogResult.Yes)
             {
                 whiteboard.Image = null;
@@ -364,33 +469,9 @@ namespace ProjektOkienkowy
                 Triangle.Visible = true;
             }
             else if (resultOfConsWindQuest == DialogResult.No)
-            {
-                AllocConsole(); // otwiera konsole
-                int radius = 0;
-                string tempRadius;
+                Console_Complex_Shape();
 
-                Console.Clear(); // czysci konsole
-                Console.Write("Enter the radius\n>> ");
 
-                try
-                {
-                    tempRadius = Console.ReadLine();
-                    radius = Convert.ToInt32(tempRadius);
-
-                    if (radius <= 0)
-                    {
-                        MyExceptions error;
-                        error = new MyExceptions();
-                        throw error;
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine("Error! Radius can't be zero!");
-                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                    Environment.Exit(1); // zamknięcie konsoli
-                }
-            }
             //DO WYWALENIA
             //    private void Circle_Click(object sender, EventArgs e)
             //    {
