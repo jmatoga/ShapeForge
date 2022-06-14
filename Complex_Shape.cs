@@ -29,16 +29,11 @@ namespace ProjektOkienkowy
         int new_beginning_y = 0;//nowy pozatek dla y
         int ifClicked = 0;//licznik do ile razy klikniete byl guzik
 
-
-
         public Complex_Shape()
         {
             InitializeComponent();
         }
 
-
-        //
-        //guzik do cofania
         private void back_button_click(object sender, EventArgs e)
         {
             Simple_Shape back_to_Simple_Shape = new Simple_Shape();
@@ -46,16 +41,9 @@ namespace ProjektOkienkowy
             this.Hide();
         }
 
-
-
-
         //guzik do circle
         private void read_Click(object sender, EventArgs e)
         {
-            //System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
-            //resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
-            //if (resultOfConsWindQuest == DialogResult.Yes)
-            //{
             int radius = 0;
             if (count > 0)
             {
@@ -420,15 +408,7 @@ namespace ProjektOkienkowy
             }
 
 
-
-
-
-
-
-
             //
-
-
 
 
             //DO WYWALENIA
@@ -456,6 +436,3 @@ namespace ProjektOkienkowy
         }
     }
 }
-   
-
-

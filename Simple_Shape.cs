@@ -478,9 +478,43 @@ namespace ProjektOkienkowy
 
         private void Complex_Click(object sender, EventArgs e)
         {
-            Complex_Shape complex_shape_window = new Complex_Shape();
-            complex_shape_window.Show();
-            this.Hide();
+            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
+            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
+
+            if (resultOfConsWindQuest == DialogResult.Yes)
+            {
+                Complex_Shape complex_shape_window = new Complex_Shape();
+                complex_shape_window.Show();
+                this.Hide();
+            }
+            else if (resultOfConsWindQuest == DialogResult.No)
+            {
+                AllocConsole(); // otwiera konsole
+                int radius = 0;
+                string tempRadius;
+
+                Console.Clear(); // czysci konsole
+                Console.Write("Enter the radius\n>> ");
+
+                try
+                {
+                    tempRadius = Console.ReadLine();
+                    radius = Convert.ToInt32(tempRadius);
+
+                    if (radius <= 0)
+                    {
+                        MyExceptions error;
+                        error = new MyExceptions();
+                        throw error;
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Error! Radius can't be zero!");
+                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                    Environment.Exit(1); // zamknięcie konsoli
+                }
+            }
         }
 
         public void Clear_Click(object sender, EventArgs e)
