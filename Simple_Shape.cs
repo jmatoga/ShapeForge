@@ -472,7 +472,7 @@ namespace ProjektOkienkowy
                     {
                         //-0,1 dlatego ze skonczona dokladnosc obliczeniowa
                         if (y <= vec1 * x && y >= vec2 * x && y <= (vec2 * x + wsp1) && y >= (vec1 * x + wsp2 - 0.1) && y >= vec3 * x && y <= (vec3 * x + wsp4) && y <= vec4 * x && y >= (vec4 * x + wsp3 - 0.1))
-                            Console.Write("P");
+                            Console.Write("p");
                         else
                             Console.Write(" ");
                     }

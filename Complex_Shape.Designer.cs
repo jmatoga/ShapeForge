@@ -110,7 +110,7 @@ namespace ProjektOkienkowy
             // 
             this.LabelOfLeftFigures.AutoSize = true;
             this.LabelOfLeftFigures.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LabelOfLeftFigures.Location = new System.Drawing.Point(774, 268);
+            this.LabelOfLeftFigures.Location = new System.Drawing.Point(782, 263);
             this.LabelOfLeftFigures.Name = "LabelOfLeftFigures";
             this.LabelOfLeftFigures.Size = new System.Drawing.Size(181, 30);
             this.LabelOfLeftFigures.TabIndex = 15;

@@ -86,7 +86,7 @@ namespace ProjektOkienkowy
             // 
             this.Complex.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.Complex.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.Complex.Location = new System.Drawing.Point(779, 190);
+            this.Complex.Location = new System.Drawing.Point(779, 192);
             this.Complex.Name = "Complex";
             this.Complex.Size = new System.Drawing.Size(184, 51);
             this.Complex.TabIndex = 6;
@@ -112,6 +112,7 @@ namespace ProjektOkienkowy
             this.Text = "Simple Shape";
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).EndInit();
             this.ResumeLayout(false);
+
         }
 
         #endregion
