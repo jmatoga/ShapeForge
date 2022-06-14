@@ -392,7 +392,8 @@ namespace ProjektOkienkowy
                             }
                         }
 
-                        int x1_int = Convert.ToInt32(args[0]); // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        int x1_int = Convert.ToInt32(args[0]); 
                         int y1_int = Convert.ToInt32(args[1]);
                         int x2_int = Convert.ToInt32(args[2]);
                         int y2_int = Convert.ToInt32(args[3]);
