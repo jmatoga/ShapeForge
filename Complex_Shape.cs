@@ -52,134 +52,131 @@ namespace ProjektOkienkowy
         //guzik do circle
         private void read_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
-            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
-            if (resultOfConsWindQuest == DialogResult.Yes)
+            //System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
+            //resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
+            //if (resultOfConsWindQuest == DialogResult.Yes)
+            //{
+            int radius = 0;
+            if (count > 0)
             {
+                string message = "Please give me the radius:", title = "Taking data", defaultValue = "For example 1";
+                object Value;
 
-                if (count > 0) 
+                Value = Interaction.InputBox(message, title, defaultValue);
+                if ((string)Value == "")
                 {
-                  
-                    int radius = 0;
-                    string message = "Please give me the radius:", title = "Taking data", defaultValue = "For example 1";
-                    object Value;
+                    Value = defaultValue;
+                    Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                }
+                else
+                {
+                    string stringValue = (string)Value;
 
-                    //whiteboard.Image = null; // czysczenie textboxa
+                    // sprawdzam czy podana wartosc jest intem
+                    for (int i = 0; i < stringValue.Length; i++)
+                        if (stringValue[i] < 48 || stringValue[i] > 57)
+                        {
+                            Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                            Environment.Exit(1);
+                        }
 
-                    Value = Interaction.InputBox(message, title, defaultValue);
-                    if ((string)Value == "")
-                    {
-                        Value = defaultValue;
-                        Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                    }
-                    else
-                    {
-                        string stringValue = (string)Value;
+                    radius = Int32.Parse(Value.ToString()); // konwertuje z stringa do int i przypisuje do wartosci radius
+                }
+                if (ifClicked > 0)
+                {
 
-                        // sprawdzam czy podana wartosc jest intem
-                        for (int i = 0; i < stringValue.Length; i++)
-                            if (stringValue[i] < 48 || stringValue[i] > 57)
-                            {
-                                Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1);
-                            }
-
-                        radius = Int32.Parse(Value.ToString()); // konwertuje z stringa do int i przypisuje do wartosci radius
-                    }
-                    if (ifClicked > 0)
-                    {
-
-                        int beginning_y = (new_beginning_y -( radius / 2));
-                        g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                        g.DrawEllipse(pen_circle, new_beginning_x, beginning_y, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
-                        //zeby nowa figura byla na srednicy a nie kwadracie
-                        new_beginning_x +=  radius;//x powiekoszne o sreddnice
-                        new_beginning_y=beginning_y+radius/2;//zeby bylo w srodku kola
-
-                    }
-                    else
-                    {
-                        new_beginning_x+= radius;
-                        g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                        g.DrawEllipse(pen_circle, 0,0, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
-                        //zeby nowa figura byla na srednicy a nie kwadracie
-                        new_beginning_x =  radius;
-                        new_beginning_y = radius/2 ;
-                    }
-                        count--;
-                        label1.Text = "Figures left: " + count;
-
-                    ifClicked++;//jesli klikne to licznik w gore o jeden
+                    int beginning_y = (new_beginning_y - (radius / 2));
+                    g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
+                    g.DrawEllipse(pen_circle, new_beginning_x, beginning_y, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+                                                                                             //zeby nowa figura byla na srednicy a nie kwadracie
+                    new_beginning_x += radius;//x powiekoszne o sreddnice
+                    new_beginning_y = beginning_y + radius / 2;//zeby bylo w srodku kola
 
                 }
                 else
                 {
-                    read.Visible = false;
+                    new_beginning_x += radius;
+                    g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
+                    g.DrawEllipse(pen_circle, 0, 0, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+                                                                     //zeby nowa figura byla na srednicy a nie kwadracie
+                    new_beginning_x = radius;
+                    new_beginning_y = radius / 2;
                 }
+                count--;
+                label1.Text = "Figures left: " + count;
+
+                ifClicked++;//jesli klikne to licznik w gore o jeden
+
             }
-            else if (resultOfConsWindQuest == DialogResult.No)
+            else
             {
-                AllocConsole(); // otwiera konsole
-                int radius = 0;
-                string tempRadius;
+                read.Visible = false;
+            }
 
-                Console.Clear(); // czysci konsole
-                Console.Write("Enter the radius\n>> ");
+            //}
+            //else if (resultOfConsWindQuest == DialogResult.No)
+            //{
+            //    AllocConsole(); // otwiera konsole
+            //    int radius = 0;
+            //    string tempRadius;
 
-                try
+            //    Console.Clear(); // czysci konsole
+            //    Console.Write("Enter the radius\n>> ");
+
+            //    try
+            //    {
+            //        tempRadius = Console.ReadLine();
+            //        radius = Convert.ToInt32(tempRadius);
+
+            //        if (radius <= 0)
+            //        {
+            //            MyExceptions error;
+            //            error = new MyExceptions();
+            //            throw error;
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        Console.WriteLine("Error! Radius can't be zero!");
+            //        Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+            //        Environment.Exit(1); // zamknięcie konsoli
+            //    }
+
+            int length = 2 * radius + 1;
+
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; j < length; j++)
                 {
-                    tempRadius = Console.ReadLine();
-                    radius = Convert.ToInt32(tempRadius);
-
-                    if (radius <= 0)
-                    {
-                        MyExceptions error;
-                        error = new MyExceptions();
-                        throw error;
-                    }
+                    if (((i - radius) * (i - radius) + (j - radius) * (j - radius)) <= (radius * radius))
+                        Console.Write("c");
+                    else
+                        Console.Write(" ");
                 }
-                catch
-                {
-                    Console.WriteLine("Error! Radius can't be zero!");
-                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                    Environment.Exit(1); // zamknięcie konsoli
-                }
-
-                int length = 2 * radius + 1;
-
-                for (int i = 0; i < length; i++)
-                {
-                    for (int j = 0; j < length; j++)
-                    {
-                        if (((i - radius) * (i - radius) + (j - radius) * (j - radius)) <= (radius * radius))
-                            Console.Write("c");
-                        else
-                            Console.Write(" ");
-                    }
-                    Console.WriteLine(); // działa jak endl
-                }
+                Console.WriteLine(); // działa jak endl
             }
         }
+
 
         //guzik do trójkąta
         private void Triangle_Click(object sender, EventArgs e)
         {
-           
+
             if (count == 0)
             {
-               Triangle.Visible = false;//chowam guzik jesli nie moge juz wiecej figur miec
+                Triangle.Visible = false;//chowam guzik jesli nie moge juz wiecej figur miec
             }
-            else 
-            { 
-            string message = "Please enter the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
-            string message1 = "Please enter the second X coords and Y coords:", title1 = "Taking second data";
-            object Value, Value1;
+            else
+            {
+                string message = "Please enter the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
+                string message1 = "Please enter the second X coords and Y coords:", title1 = "Taking second data";
+                object Value, Value1;
 
-            double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+                double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
 
-            //whiteboard.Image = null; // czysczenie textboxa
+                //whiteboard.Image = null; // czysczenie textboxa
 
-            Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
+                Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
 
                 // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
                 if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
@@ -226,9 +223,9 @@ namespace ProjektOkienkowy
                         }
                         else
                         {
-                          
-                           g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                            Point[] points = new Point[] { new Point { X = new_beginning_x, Y = new_beginning_y }, new Point { X = new_beginning_x+ x1_int, Y = new_beginning_y+ y1_int }, new Point { X = new_beginning_x+ x2_int, Y = new_beginning_y+y2_int } }; // ustawianie wierzchołków trójkąta
+
+                            g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
+                            Point[] points = new Point[] { new Point { X = new_beginning_x, Y = new_beginning_y }, new Point { X = new_beginning_x + x1_int, Y = new_beginning_y + y1_int }, new Point { X = new_beginning_x + x2_int, Y = new_beginning_y + y2_int } }; // ustawianie wierzchołków trójkąta
                             g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                             new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
@@ -305,7 +302,7 @@ namespace ProjektOkienkowy
                 string message1 = "Please give me the second X coords and Y coords:", title1 = "Taking second data";
                 object Value, Value1;
 
-                double[] args = { 0, 0, 0, 0}; // argumenty x1, y1, x2, y2
+                double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
 
                 //     whiteboard.Image = null; // czysczenie textboxa
 
@@ -347,20 +344,20 @@ namespace ProjektOkienkowy
                         int y2_int = Convert.ToInt32(args[3]);
 
 
-                      
-                        if(ifClicked>0)
+
+                        if (ifClicked > 0)
                         {
-                            
+
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                            Point[] points = new Point[] { new Point { X =new_beginning_x, Y = new_beginning_y }, new Point { X = new_beginning_x+x1_int, Y = new_beginning_y+ y1_int }, new Point { X = new_beginning_x+ x1_int + x2_int, Y = new_beginning_y+y1_int + y2_int }, new Point { X = new_beginning_x+x2_int, Y = new_beginning_y+ y2_int } }; // ustawianie wierzchołków równoległoboku
+                            Point[] points = new Point[] { new Point { X = new_beginning_x, Y = new_beginning_y }, new Point { X = new_beginning_x + x1_int, Y = new_beginning_y + y1_int }, new Point { X = new_beginning_x + x1_int + x2_int, Y = new_beginning_y + y1_int + y2_int }, new Point { X = new_beginning_x + x2_int, Y = new_beginning_y + y2_int } }; // ustawianie wierzchołków równoległoboku
                             g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku rownoleglobok bo 4 wierzchołki)
                             new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
                         }
-                       else
+                        else
                         {
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                            Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = new_beginning_x+x1_int, Y = new_beginning_y+y1_int }, new Point { X = new_beginning_x+x1_int + x2_int, Y = new_beginning_y+y1_int + y2_int }, new Point { X = new_beginning_x+x2_int, Y = new_beginning_y+ y2_int } }; // ustawianie wierzchołków równoległoboku
+                            Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = new_beginning_x + x1_int, Y = new_beginning_y + y1_int }, new Point { X = new_beginning_x + x1_int + x2_int, Y = new_beginning_y + y1_int + y2_int }, new Point { X = new_beginning_x + x2_int, Y = new_beginning_y + y2_int } }; // ustawianie wierzchołków równoległoboku
                             g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku rownoleglobok bo 4 wierzchołki)
                             new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
@@ -376,54 +373,89 @@ namespace ProjektOkienkowy
         //guzik clear
         private void Clear_Click(object sender, EventArgs e)
         {
-            whiteboard.Image = null;
-            count = 5;
-            label1.Text = "Figures left: " + count;
-            ifClicked = 0;
-            new_beginning_x=0;
-            new_beginning_y =0;
-            Parallelogram.Visible = true;
-            read.Visible = true;
-            Triangle.Visible = true;
+
+
+            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
+            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
+            if (resultOfConsWindQuest == DialogResult.Yes)
+            {
+                whiteboard.Image = null;
+                count = 5;
+                label1.Text = "Figures left: " + count;
+                ifClicked = 0;
+                new_beginning_x = 0;
+                new_beginning_y = 0;
+                Parallelogram.Visible = true;
+                read.Visible = true;
+                Triangle.Visible = true;
+            }
+            else if (resultOfConsWindQuest == DialogResult.No)
+            {
+                AllocConsole(); // otwiera konsole
+                int radius = 0;
+                string tempRadius;
+
+                Console.Clear(); // czysci konsole
+                Console.Write("Enter the radius\n>> ");
+
+                try
+                {
+                    tempRadius = Console.ReadLine();
+                    radius = Convert.ToInt32(tempRadius);
+
+                    if (radius <= 0)
+                    {
+                        MyExceptions error;
+                        error = new MyExceptions();
+                        throw error;
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Error! Radius can't be zero!");
+                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                    Environment.Exit(1); // zamknięcie konsoli
+                }
+
+            }
+
+
+
+
+
+
+
+
+            //
+
+
+
+
+            //DO WYWALENIA
+            //    private void read_Click(object sender, EventArgs e)
+            //    {
+            //        //label1.Text = enter_how_many_figures.Text;
+            //        data = enter_how_many_figures.Text;
+            //        if(data == "d")
+            //            this.Hide();
+            //    }
+
+            //    private void enter_how_many_figures_keyDown(object sender, KeyEventArgs e)
+            //    {
+            //        if(e.KeyCode == Keys.Enter)
+            //        {
+            //            MessageBox.Show("dasda");
+            //        }
+            //    }
+
+            //    private void enter_how_many_figures_TextChanged(object sender, EventArgs e)
+            //    {
+            //        label1.Text = enter_how_many_figures.Text;
+            //    }
+            //}
         }
-
-
-
-
-
-
-
-
-        //
-
-
-
-
-        //DO WYWALENIA
-        //    private void read_Click(object sender, EventArgs e)
-        //    {
-        //        //label1.Text = enter_how_many_figures.Text;
-        //        data = enter_how_many_figures.Text;
-        //        if(data == "d")
-        //            this.Hide();
-        //    }
-
-        //    private void enter_how_many_figures_keyDown(object sender, KeyEventArgs e)
-        //    {
-        //        if(e.KeyCode == Keys.Enter)
-        //        {
-        //            MessageBox.Show("dasda");
-        //        }
-        //    }
-
-        //    private void enter_how_many_figures_TextChanged(object sender, EventArgs e)
-        //    {
-        //        label1.Text = enter_how_many_figures.Text;
-        //    }
-        //}
     }
- }
-
+}
    
 
 
