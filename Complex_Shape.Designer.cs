@@ -93,7 +93,7 @@ namespace ProjektOkienkowy
             this.read.TabIndex = 8;
             this.read.Text = "Circle";
             this.read.UseVisualStyleBackColor = false;
-            this.read.Click += new System.EventHandler(this.read_Click);
+            this.read.Click += new System.EventHandler(this.Circle_Click);
             // 
             // Back
             // 

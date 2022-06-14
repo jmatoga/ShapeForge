@@ -12,7 +12,8 @@ using System.Runtime.InteropServices; // aby móc wyświetlić konsole !!! (trze
 
 namespace ProjektOkienkowy
 {
-    public partial class Simple_Shape : Form//tworzenie okienka pierwszego Simple Shape
+    //tworzenie okienka pierwszego Simple Shape
+    public partial class Simple_Shape : Form
     {
         // aby utworzyć konsole
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -20,15 +21,18 @@ namespace ProjektOkienkowy
         static extern bool AllocConsole();
 
         private System.Drawing.Graphics g; // tworzenie zmiennej Grapihics do rysowania 
-        private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3); // tworzenie dlugopisa do rysowania 
-        private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3); // tworzenie dlugopisa do rysowania 
-        private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3); // tworzenie dlugopisa do rysowania 
+
+        // tworzenie dlugopisów do rysowania 
+        private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3); 
+        private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3); 
+        private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3); 
+
         public Simple_Shape()
         {
             InitializeComponent(); // to sie robi samo - metoda wymagana do obsługi projektanta 
         }
 
-        private void Circle_click(object sender, EventArgs e)
+        private void Circle_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
             resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
@@ -36,10 +40,10 @@ namespace ProjektOkienkowy
             if (resultOfConsWindQuest == DialogResult.Yes)
             {
                 int radius = 0;
-                string message = "Please give me the radius:", title = "Taking data", defaultValue = "For example 1";
+                string message = "Please enter the radius:", title = "Taking data", defaultValue = "For example 1";
                 object Value;
 
-                whiteboard.Image = null; // czysczenie textboxa
+                whiteboard.Image = null; // czysczenie whiteboarda
 
                 Value = Interaction.InputBox(message, title, defaultValue);
 
@@ -59,7 +63,7 @@ namespace ProjektOkienkowy
                             Environment.Exit(1);
                         }
 
-                    radius = Int32.Parse(Value.ToString()); // konwertuje z stringa do int i przypisuje do wartosci radius
+                    radius = Int32.Parse(Value.ToString()); // konwertuje ze stringa do int i przypisuje do wartosci radius
                 }
 
                 g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
@@ -122,7 +126,7 @@ namespace ProjektOkienkowy
                 object Value, Value1;
                 double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
 
-                whiteboard.Image = null; // czysczenie textboxa
+                whiteboard.Image = null; // czysczenie whiteboarda
 
                 Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
 
@@ -134,8 +138,9 @@ namespace ProjektOkienkowy
                 {
                     Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
 
-                    if ((string)Value1 == "" || (string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
+                    if ((string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
                         Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                    else if ((string)Value1 == "") { } // gdy sie kliknie cancel
                     else
                     {
                         string stringValue = (string)Value;
@@ -183,10 +188,8 @@ namespace ProjektOkienkowy
                             }
                         }
 
-                        // do wywalenia
-                        Microsoft.VisualBasic.Interaction.MsgBox("DDDDDD " + args[0] + " " + args[1] + " DD" + args[2] + " " + args[3], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "DDDD"); // do wywalenia
-
-                        int x1_int = Convert.ToInt32(args[0]); // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        int x1_int = Convert.ToInt32(args[0]); 
                         int y1_int = Convert.ToInt32(args[1]);
                         int x2_int = Convert.ToInt32(args[2]);
                         int y2_int = Convert.ToInt32(args[3]);
@@ -210,13 +213,13 @@ namespace ProjektOkienkowy
                     for (int i = 0; i < 4; i++)
                     {
                         if (i == 0)
-                            Console.Write("Give me X1\n>> ");
+                            Console.Write("Enter X1\n>> ");
                         else if (i == 1)
-                            Console.Write("Give me Y1\n>> ");
+                            Console.Write("Enter Y1\n>> ");
                         else if (i == 2)
-                            Console.Write("Give me X2\n>> ");
+                            Console.Write("Enter X2\n>> ");
                         else if (i == 3)
-                            Console.Write("Give me Y2\n>> ");
+                            Console.Write("Enter Y2\n>> ");
 
                         tempArg = Console.ReadLine();
                         args[i] = Convert.ToInt32(tempArg);
@@ -323,13 +326,13 @@ namespace ProjektOkienkowy
 
             if (resultOfConsWindQuest == DialogResult.Yes)
             {
-                string message = "Please give me the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
-                string message1 = "Please give me the second X coords and Y coords:", title1 = "Taking second data";
+                string message = "Please enter the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
+                string message1 = "Please enter the second X coords and Y coords:", title1 = "Taking second data";
                 object Value, Value1;
 
                 double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
 
-                whiteboard.Image = null; // czysczenie textboxa
+                whiteboard.Image = null; // czysczenie whiteboarda
 
                 Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
 
@@ -413,13 +416,13 @@ namespace ProjektOkienkowy
                     for (int i = 0; i < 4; i++)
                     {
                         if (i == 0)
-                            Console.Write("Give me X1\n>> ");
+                            Console.Write("Enter X1\n>> ");
                         else if (i == 1)
-                            Console.Write("Give me Y1\n>> ");
+                            Console.Write("Enter Y1\n>> ");
                         else if (i == 2)
-                            Console.Write("Give me X2\n>> ");
+                            Console.Write("Enter X2\n>> ");
                         else if (i == 3)
-                            Console.Write("Give me Y2\n>> ");
+                            Console.Write("Enter Y2\n>> ");
 
                         tempArg = Console.ReadLine();
                         args[i] = Convert.ToInt32(tempArg);
@@ -449,14 +452,14 @@ namespace ProjektOkienkowy
                     Environment.Exit(1); // zamknięcie konsoli
                 }
 
-                int x1 = 3, y1 = 2, x2 = 2, y2 = -2; //!!!
+                int x1 = 3, y1 = 2, x2 = 2, y2 = -2; // !!!
 
                 double vec1 = y1 / Convert.ToDouble(x1);
                 double vec2 = y2 / Convert.ToDouble(x2);
                 double vec3 = y1 / Convert.ToDouble(-x2);
                 double vec4 = y2 / Convert.ToDouble(-x1);
 
-                //wspolczynniki
+                // wspolczynniki
                 double wsp1 = Convert.ToDouble(y1 - x1 * vec2);
                 double wsp2 = Convert.ToDouble(y2 - x2 * vec1);
                 double wsp3 = Convert.ToDouble(y2 - x2 * vec4);
@@ -521,8 +524,6 @@ namespace ProjektOkienkowy
         {
             whiteboard.Image = null;
         }
-
-        private void whiteboard_Click(object sender, EventArgs e) { }
 
         private void Error(object sender, EventArgs e, string ErrorMsg)
         {

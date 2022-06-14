@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Drawing; // do rysowania 
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,24 +10,27 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic; // aby móc pobierac informajce z okienka wyskakującego
 using System.Runtime.InteropServices; // aby móc wyświetlić konsole !!! (trzeba włączyć narzędzia->opcje->debuggowanie->użyj zarządzanego trybu zgodności) jest to forma przestarzała ale inaczej nie działa Console.WriteLine
 
-
 namespace ProjektOkienkowy
 {
-    public partial class Complex_Shape : Form //tworzenie drugiego okienka complex shape
+    //tworzenie drugiego okienka complex shape
+    public partial class Complex_Shape : Form 
     {
         // aby utworzyć konsole
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
-        //dlugopisy do rysowania
+
         private System.Drawing.Graphics g; // tworzenie zmiennej Grapihics do rysowania 
-        public int count = 5;//licznik ile pozostało figur do narysowania - 5 bo ma być maksymalnie 5 figur
-        private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3); // tworzenie dlugopisa do rysowania 
-        private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3); // tworzenie dlugopisa do rysowania 
-        private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3); // tworzenie dlugopisa do rysowania 
-        int new_beginning_x = 0;//zeby byly obok siebie nowy poczatek wspolrzednej
-        int new_beginning_y = 0;//nowy pozatek dla y
-        int ifClicked = 0;//licznik do ile razy klikniete byl guzik
+        public int count = 5; // licznik ile pozostało figur do narysowania - 5 bo ma być maksymalnie 5 figur
+
+        // tworzenie dlugopisów do rysowania 
+        private System.Drawing.Pen pen_circle = new System.Drawing.Pen(Color.Aquamarine, 3); 
+        private System.Drawing.Pen pen_triangle = new System.Drawing.Pen(Color.Purple, 3); 
+        private System.Drawing.Pen pen_figure = new System.Drawing.Pen(Color.LimeGreen, 3); 
+
+        int new_beginning_x = 0; // zeby byly obok siebie nowy początek wspolrzednej
+        int new_beginning_y = 0; // nowy początek dla y
+        int ifClicked = 0; // licznik ile razy został kliknięty guzik
 
         public Complex_Shape()
         {
@@ -41,13 +44,12 @@ namespace ProjektOkienkowy
             this.Hide();
         }
 
-        //guzik do circle
-        private void read_Click(object sender, EventArgs e)
+        private void Circle_Click(object sender, EventArgs e)
         {
             int radius = 0;
             if (count > 0)
             {
-                string message = "Please give me the radius:", title = "Taking data", defaultValue = "For example 1";
+                string message = "Please enter the radius:", title = "Taking data", defaultValue = "For example 1";
                 object Value;
 
                 Value = Interaction.InputBox(message, title, defaultValue);
@@ -70,31 +72,31 @@ namespace ProjektOkienkowy
 
                     radius = Int32.Parse(Value.ToString()); // konwertuje z stringa do int i przypisuje do wartosci radius
                 }
+
                 if (ifClicked > 0)
                 {
-
                     int beginning_y = (new_beginning_y - (radius / 2));
                     g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                     g.DrawEllipse(pen_circle, new_beginning_x, beginning_y, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
-                                                                                             //zeby nowa figura byla na srednicy a nie kwadracie
-                    new_beginning_x += radius;//x powiekoszne o sreddnice
-                    new_beginning_y = beginning_y + radius / 2;//zeby bylo w srodku kola
-
+                  
+                    // zeby nowa figura byla na srednicy a nie kwadracie
+                    new_beginning_x += radius; // x powiekoszne o sreddnice
+                    new_beginning_y = beginning_y + radius / 2; // zeby bylo w srodku kola
                 }
                 else
                 {
                     new_beginning_x += radius;
                     g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                     g.DrawEllipse(pen_circle, 0, 0, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
-                                                                     //zeby nowa figura byla na srednicy a nie kwadracie
+
+                    // zeby nowa figura byla na srednicy a nie kwadracie
                     new_beginning_x = radius;
                     new_beginning_y = radius / 2;
                 }
                 count--;
                 label1.Text = "Figures left: " + count;
 
-                ifClicked++;//jesli klikne to licznik w gore o jeden
-
+                ifClicked++;// jesli klikne to licznik w gore o jeden
             }
             else
             {
@@ -145,11 +147,8 @@ namespace ProjektOkienkowy
             }
         }
 
-
-        //guzik do trójkąta
         private void Triangle_Click(object sender, EventArgs e)
         {
-
             if (count == 0)
             {
                 Triangle.Visible = false;//chowam guzik jesli nie moge juz wiecej figur miec
@@ -162,18 +161,18 @@ namespace ProjektOkienkowy
 
                 double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
 
-                //whiteboard.Image = null; // czysczenie textboxa
-
                 Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
 
                 // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
-                if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
+                if ((string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
                     Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                else if ((string)Value == "") { } // gdy sie kliknie cancel
                 else
                 {
                     Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
-                    if ((string)Value1 == "" || (string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
+                    if ((string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
                         Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                    else if ((string)Value1 == "") { } // gdy sie kliknie cancel
                     else
                     {
                         string stringValue = (string)Value;
@@ -193,10 +192,8 @@ namespace ProjektOkienkowy
                             }
                         }
 
-                        // do wywalenia
-                        Microsoft.VisualBasic.Interaction.MsgBox("DDDDDD " + args[0] + " " + args[1] + " DD" + args[2] + " " + args[3], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "DDDD"); // do wywalenia
-
-                        int x1_int = Convert.ToInt32(args[0]); // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        int x1_int = Convert.ToInt32(args[0]); 
                         int y1_int = Convert.ToInt32(args[1]);
                         int x2_int = Convert.ToInt32(args[2]);
                         int y2_int = Convert.ToInt32(args[3]);
@@ -205,17 +202,16 @@ namespace ProjektOkienkowy
                         {
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                             Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków trójkąta
-                            new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
+                            new_beginning_x = points[2].X; // zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
                             g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki )
                         }
                         else
                         {
-
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                             Point[] points = new Point[] { new Point { X = new_beginning_x, Y = new_beginning_y }, new Point { X = new_beginning_x + x1_int, Y = new_beginning_y + y1_int }, new Point { X = new_beginning_x + x2_int, Y = new_beginning_y + y2_int } }; // ustawianie wierzchołków trójkąta
                             g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
-                            new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
+                            new_beginning_x = points[2].X; // zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
                         }
                         count--;
@@ -225,6 +221,7 @@ namespace ProjektOkienkowy
                 }
             }
         }
+
         private void TakeData(object sender, EventArgs e, string stringValue, double[] args, int data1, int data2)
         {
             bool ifSpace = false; // zmienna sprawdzajaca czy jestesmy juz po spacji (zeby wpisywac wartosci do Y)
@@ -275,35 +272,31 @@ namespace ProjektOkienkowy
                 args[data2] = -args[data2];
         }
 
-        //guzik do rownolegloboku
         private void Parallelogram_Click(object sender, EventArgs e)
         {
-
             if (count == 0)
             {
                 Parallelogram.Visible = false;
             }
             else
             {
-
-                string message = "Please give me the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
-                string message1 = "Please give me the second X coords and Y coords:", title1 = "Taking second data";
+                string message = "Please enter the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
+                string message1 = "Please enter the second X coords and Y coords:", title1 = "Taking second data";
                 object Value, Value1;
-
                 double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
-
-                //     whiteboard.Image = null; // czysczenie textboxa
 
                 Value = Interaction.InputBox(message, title, defaultValue); // wyswietlamy pierwsze okienko
 
-                // jesli uzytkownik kliknie anuluj lub samo enter czyli defaultValue bedzie
-                if ((string)Value == "" || (string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
+                // jesli uzytkownik kliknie samo enter czyli bedzie defaultValue 
+                if ((string)Value == defaultValue) // zeby sie nie wyswietlilo Value1 czyli drugie okienko skoro w pierwszym juz jest blad
                     Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                else if ((string)Value == "") { } // gdy sie kliknie cancel
                 else
                 {
                     Value1 = Interaction.InputBox(message1, title1, defaultValue); // wyswietlamy drugie okienko
-                    if ((string)Value1 == "" || (string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
+                    if ((string)Value1 == defaultValue) // sprawdzamy czy podane dane sa dobre
                         Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
+                    else if ((string)Value1 == "") { } // gdy sie kliknie cancel
                     else
                     {
                         string stringValue = (string)Value;
@@ -323,23 +316,18 @@ namespace ProjektOkienkowy
                             }
                         }
 
-                        // do wywalenia
-                        Microsoft.VisualBasic.Interaction.MsgBox("DDDDDD " + args[0] + " " + args[1] + " DD" + args[2] + " " + args[3], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "DDDD"); // do wywalenia
-
-                        int x1_int = Convert.ToInt32(args[0]); // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        // zamiana double na int (double trzeba użyć przy obliczaniu potęgi)
+                        int x1_int = Convert.ToInt32(args[0]); 
                         int y1_int = Convert.ToInt32(args[1]);
                         int x2_int = Convert.ToInt32(args[2]);
                         int y2_int = Convert.ToInt32(args[3]);
 
-
-
                         if (ifClicked > 0)
                         {
-
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                             Point[] points = new Point[] { new Point { X = new_beginning_x, Y = new_beginning_y }, new Point { X = new_beginning_x + x1_int, Y = new_beginning_y + y1_int }, new Point { X = new_beginning_x + x1_int + x2_int, Y = new_beginning_y + y1_int + y2_int }, new Point { X = new_beginning_x + x2_int, Y = new_beginning_y + y2_int } }; // ustawianie wierzchołków równoległoboku
                             g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku rownoleglobok bo 4 wierzchołki)
-                            new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
+                            new_beginning_x = points[2].X; // zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
                         }
                         else
@@ -347,7 +335,7 @@ namespace ProjektOkienkowy
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                             Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = new_beginning_x + x1_int, Y = new_beginning_y + y1_int }, new Point { X = new_beginning_x + x1_int + x2_int, Y = new_beginning_y + y1_int + y2_int }, new Point { X = new_beginning_x + x2_int, Y = new_beginning_y + y2_int } }; // ustawianie wierzchołków równoległoboku
                             g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku rownoleglobok bo 4 wierzchołki)
-                            new_beginning_x = points[2].X;//zapamietuje poprzednie zeby byly poczatkiem nastepnego
+                            new_beginning_x = points[2].X; // zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
                         }
                         count--;
@@ -358,13 +346,11 @@ namespace ProjektOkienkowy
             }
         }
 
-        //guzik clear
         private void Clear_Click(object sender, EventArgs e)
         {
-
-
             System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
             resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
+            
             if (resultOfConsWindQuest == DialogResult.Yes)
             {
                 whiteboard.Image = null;
@@ -404,15 +390,9 @@ namespace ProjektOkienkowy
                     Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
                     Environment.Exit(1); // zamknięcie konsoli
                 }
-
             }
-
-
-            //
-
-
             //DO WYWALENIA
-            //    private void read_Click(object sender, EventArgs e)
+            //    private void Circle_Click(object sender, EventArgs e)
             //    {
             //        //label1.Text = enter_how_many_figures.Text;
             //        data = enter_how_many_figures.Text;

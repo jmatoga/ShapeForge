@@ -47,7 +47,7 @@ namespace ProjektOkienkowy
             this.Circle.TabIndex = 0;
             this.Circle.Text = "Circle";
             this.Circle.UseVisualStyleBackColor = false;
-            this.Circle.Click += new System.EventHandler(this.Circle_click);
+            this.Circle.Click += new System.EventHandler(this.Circle_Click);
             // 
             // Triangle
             // 
@@ -81,7 +81,6 @@ namespace ProjektOkienkowy
             this.whiteboard.Size = new System.Drawing.Size(700, 555);
             this.whiteboard.TabIndex = 5;
             this.whiteboard.TabStop = false;
-            this.whiteboard.Click += new System.EventHandler(this.whiteboard_Click);
             // 
             // Complex
             // 
@@ -113,7 +112,6 @@ namespace ProjektOkienkowy
             this.Text = "Simple Shape";
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
@@ -124,7 +122,4 @@ namespace ProjektOkienkowy
         private System.Windows.Forms.PictureBox whiteboard;
         private System.Windows.Forms.Button Complex;
     }
-
-   
 }
-
