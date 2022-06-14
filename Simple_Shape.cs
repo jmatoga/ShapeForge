@@ -227,6 +227,7 @@ namespace ProjektOkienkowy
                         // sprawdzamy założenia
                         if (i == 3 && args[3] >= 0)
                             Error(sender, e, "Error! Y2 must be negativ intiger");
+
                         if (i < 3 && args[i] < 0)
                         {
                             string temp = "Wrong Value";
@@ -253,19 +254,28 @@ namespace ProjektOkienkowy
                 int height = args[1] - args[3]; // - ponieważ y2 musi byc wartoscia ujemna
                 int width = args[0] + args[2];
 
-                //int length = 2 * radius + 1;
+                // przypisywanie wartości wpisane przez użytkownika do zmiennych x1,y1,x2,y2 zeby bylo wygodniej
+                int x1 = args[0];
+                int y1 = args[1];
+                int x2 = args[2];
+                int y2 = args[3];
 
-                //for (int i = 0; i < length; i++)
-                //{
-                //    for (int j = 0; j < length; j++)
-                //    {
-                //        if (((i - radius) * (i - radius) + (j - radius) * (j - radius)) <= (radius * radius))
-                //            Console.Write("c");
-                //        else
-                //            Console.Write(" ");
-                //    }
-                //    Console.WriteLine(); // działa jak endl
-                //}
+                double vec1 = y1 / Convert.ToDouble(x1);
+                double vec2 = y2 / Convert.ToDouble(x2);
+                double vec3 = (x2 - x1) / Convert.ToDouble((y2 - y1)); // obliczony 3 wektor (czyli na obrazku  z polecenia to prawa dolna krawedz trojkata)
+
+                for (int y = y1; y >= y2; y--) // od górnego y do dolnego y -> czyli po całej długości igreków(y) przechodzimy
+                {
+                    for (int x = 0; x <= x1 + x2; x++) // x = 0 bo nie moze byc ujemny, x<=x1+x2 żeby x nie wyszedł poza krawedzie trojkata 
+                    {
+
+                        if (y <= vec1 * x && y >= (vec2 * x) && x <= (x1 - vec3 * (y1 - y)))
+                            Console.Write("t");
+                        else
+                            Console.Write(" ");
+                    }
+                    Console.WriteLine();
+                }
             }
         }
 
@@ -412,53 +422,57 @@ namespace ProjektOkienkowy
 
                 Console.Clear(); // czysci konsole
 
-                //try
-                //{
-                //    for (int i = 0; i < 4; i++)
-                //    {
-                //        if (i == 0)
-                //            Console.Write("Enter X1\n>> ");
-                //        else if (i == 1)
-                //            Console.Write("Enter Y1\n>> ");
-                //        else if (i == 2)
-                //            Console.Write("Enter X2\n>> ");
-                //        else if (i == 3)
-                //            Console.Write("Enter Y2\n>> ");
+                try
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (i == 0)
+                            Console.Write("Enter X1\n>> ");
+                        else if (i == 1)
+                            Console.Write("Enter Y1\n>> ");
+                        else if (i == 2)
+                            Console.Write("Enter X2\n>> ");
+                        else if (i == 3)
+                            Console.Write("Enter Y2\n>> ");
 
-                //        tempArg = Console.ReadLine();
-                //        args[i] = Convert.ToInt32(tempArg);
+                        tempArg = Console.ReadLine();
+                        args[i] = Convert.ToInt32(tempArg);
 
-                //        if (i == 3 && args[3] >= 0)
-                //            Error(sender, e, "Error! Y2 must be negativ intiger");
-                //        if (i < 3 && args[i] < 0)
-                //        {
-                //            string temp = "Wrong Value";
-                //            if (i == 0)
-                //                temp = "X1";
-                //            else if (i == 1)
-                //                temp = "Y1";
-                //            else if (i == 2)
-                //                temp = "X2";
+                        if (i == 3 && args[3] >= 0)
+                            Error(sender, e, "Error! Y2 must be negativ intiger");
+                        if (i < 3 && args[i] < 0)
+                        {
+                            string temp = "Wrong Value";
+                            if (i == 0)
+                                temp = "X1";
+                            else if (i == 1)
+                                temp = "Y1";
+                            else if (i == 2)
+                                temp = "X2";
 
-                //            Error(sender, e, "Error! " + temp + " can't be negativ intiger");
-                //        }
-                //        if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
-                //            Error(sender, e, "Error! Badly matched coefficients");
-                //    }
-                //}
-                //catch (MyExceptions error)
-                //{
-                //    Console.WriteLine(error.ErrorMessage);
-                //    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                //    Environment.Exit(1); // zamknięcie konsoli
-                //}
+                            Error(sender, e, "Error! " + temp + " can't be negativ intiger");
+                        }
+                        if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
+                            Error(sender, e, "Error! Badly matched coefficients");
+                    }
+                }
+                catch (MyExceptions error)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                    Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                    Environment.Exit(1); // zamknięcie konsoli
+                }
 
-                int x1 = 60, y1 = 40, x2 = 40, y2 = -40; // !!!
+                // przypisywanie wartości wpisane przez użytkownika do zmiennych x1,y1,x2,y2 zeby bylo wygodniej
+                double x1 = args[0];
+                double y1 = args[1];
+                double x2 = args[2];
+                double y2 = args[3];
 
-                double vec1 = y1 / Convert.ToDouble(x1);
-                double vec2 = y2 / Convert.ToDouble(x2);
-                double vec3 = y1 / Convert.ToDouble(-x2);
-                double vec4 = y2 / Convert.ToDouble(-x1);
+                double vec1 = y1 / x1;
+                double vec2 = y2 / x2;
+                double vec3 = y1 /(-x2);
+                double vec4 = y2 / (-x1);
 
                 // wspolczynniki
                 double wsp1 = Convert.ToDouble(y1 - x1 * vec2);
@@ -466,11 +480,11 @@ namespace ProjektOkienkowy
                 double wsp3 = Convert.ToDouble(y2 - x2 * vec4);
                 double wsp4 = Convert.ToDouble(y1 - x1 * vec3);
 
-                for (int y = y1; y >= y2; y--)
+                for (int y = Convert.ToInt32(y1); y >= y2; y--)
                 {
                     for (int x = 0; x <= x1 + x2; x++)
                     {
-                        //-0,1 dlatego ze skonczona dokladnosc obliczeniowa
+                        // -0,1 dlatego ze skonczona dokladnosc obliczeniowa -> żeby w ostatniej linijce "p" sie wyswietlalo
                         if (y <= vec1 * x && y >= vec2 * x && y <= (vec2 * x + wsp1) && y >= (vec1 * x + wsp2 - 0.1) && y >= vec3 * x && y <= (vec3 * x + wsp4) && y <= vec4 * x && y >= (vec4 * x + wsp3 - 0.1))
                             Console.Write("p");
                         else

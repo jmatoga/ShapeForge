@@ -368,6 +368,205 @@ namespace ProjektOkienkowy
             }
         }
 
+        public void draw_Circle()
+        {
+            int radius = 0;
+            string tempRadius;
+
+            Console.Clear(); // czysci konsole
+            Console.Write("Enter the radius\n>> ");
+
+            try
+            {
+                tempRadius = Console.ReadLine();
+                radius = Convert.ToInt32(tempRadius);
+
+                if (radius <= 0)
+                {
+                    MyExceptions error;
+                    error = new MyExceptions("My Exception Occured");
+                    error.ErrorMessage = "Error! Radius can't be zero!";
+                    throw error;
+                }
+            }
+            catch (MyExceptions error)
+            {
+                Console.WriteLine(error.ErrorMessage);
+                Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                Environment.Exit(1); // zamknięcie konsoli
+            }
+
+            int length = 2 * radius + 1;
+
+            for (int i = 0; i < length; i++)
+            {
+                for (int j = 0; j < length; j++)
+                {
+                    if (((i - radius) * (i - radius) + (j - radius) * (j - radius)) <= (radius * radius))
+                        Console.Write("c");
+                    else
+                        Console.Write(" ");
+                }
+                Console.WriteLine(); // działa jak endl
+            }
+        }
+
+        public void draw_Triangle()
+        {
+            int[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+            string tempArg;
+
+            Console.Clear(); // czysci konsole
+
+            try
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i == 0)
+                        Console.Write("Enter X1\n>> ");
+                    else if (i == 1)
+                        Console.Write("Enter Y1\n>> ");
+                    else if (i == 2)
+                        Console.Write("Enter X2\n>> ");
+                    else if (i == 3)
+                        Console.Write("Enter Y2\n>> ");
+
+                    tempArg = Console.ReadLine();
+                    args[i] = Convert.ToInt32(tempArg);
+
+                    // sprawdzamy założenia
+                    if (i == 3 && args[3] >= 0)
+                        Error( "Error! Y2 must be negativ intiger");
+
+                    if (i < 3 && args[i] < 0)
+                    {
+                        string temp = "Wrong Value";
+                        if (i == 0)
+                            temp = "X1";
+                        else if (i == 1)
+                            temp = "Y1";
+                        else if (i == 2)
+                            temp = "X2";
+
+                        Error("Error! " + temp + " can't be negativ intiger");
+                    }
+                    if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
+                        Error("Error! Badly matched coefficients");
+                }
+            }
+            catch (MyExceptions error)
+            {
+                Console.WriteLine(error.ErrorMessage);
+                Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                Environment.Exit(1); // zamknięcie konsoli
+            }
+
+            int height = args[1] - args[3]; // - ponieważ y2 musi byc wartoscia ujemna
+            int width = args[0] + args[2];
+
+            // przypisywanie wartości wpisane przez użytkownika do zmiennych x1,y1,x2,y2 zeby bylo wygodniej
+            int x1 = args[0];
+            int y1 = args[1];
+            int x2 = args[2];
+            int y2 = args[3];
+
+            double vec1 = y1 / Convert.ToDouble(x1);
+            double vec2 = y2 / Convert.ToDouble(x2);
+            double vec3 = (x2 - x1) / Convert.ToDouble((y2 - y1)); // obliczony 3 wektor (czyli na obrazku  z polecenia to prawa dolna krawedz trojkata)
+
+            for (int y = y1; y >= y2; y--) // od górnego y do dolnego y -> czyli po całej długości igreków(y) przechodzimy
+            {
+                for (int x = 0; x <= x1 + x2; x++) // x = 0 bo nie moze byc ujemny, x<=x1+x2 żeby x nie wyszedł poza krawedzie trojkata 
+                {
+                    if (y <= vec1 * x && y >= (vec2 * x) && x <= (x1 - vec3 * (y1 - y)))
+                        Console.Write("t");
+                    else
+                        Console.Write(" ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public void draw_Parallelogram()
+        {
+            double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+            string tempArg;
+
+            Console.Clear(); // czysci konsole
+
+            try
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i == 0)
+                        Console.Write("Enter X1\n>> ");
+                    else if (i == 1)
+                        Console.Write("Enter Y1\n>> ");
+                    else if (i == 2)
+                        Console.Write("Enter X2\n>> ");
+                    else if (i == 3)
+                        Console.Write("Enter Y2\n>> ");
+
+                    tempArg = Console.ReadLine();
+                    args[i] = Convert.ToInt32(tempArg);
+
+                    if (i == 3 && args[3] >= 0)
+                        Error("Error! Y2 must be negativ intiger");
+                    if (i < 3 && args[i] < 0)
+                    {
+                        string temp = "Wrong Value";
+                        if (i == 0)
+                            temp = "X1";
+                        else if (i == 1)
+                            temp = "Y1";
+                        else if (i == 2)
+                            temp = "X2";
+
+                        Error("Error! " + temp + " can't be negativ intiger");
+                    }
+                    if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
+                        Error("Error! Badly matched coefficients");
+                }
+            }
+            catch (MyExceptions error)
+            {
+                Console.WriteLine(error.ErrorMessage);
+                Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
+                Environment.Exit(1); // zamknięcie konsoli
+            }
+
+            // przypisywanie wartości wpisane przez użytkownika do zmiennych x1,y1,x2,y2 zeby bylo wygodniej
+            double x1 = args[0];
+            double y1 = args[1];
+            double x2 = args[2];
+            double y2 = args[3];
+
+            double vec1 = y1 / x1;
+            double vec2 = y2 / x2;
+            double vec3 = y1 / (-x2);
+            double vec4 = y2 / (-x1);
+
+            // wspolczynniki
+            double wsp1 = Convert.ToDouble(y1 - x1 * vec2);
+            double wsp2 = Convert.ToDouble(y2 - x2 * vec1);
+            double wsp3 = Convert.ToDouble(y2 - x2 * vec4);
+            double wsp4 = Convert.ToDouble(y1 - x1 * vec3);
+
+            for (int y = Convert.ToInt32(y1); y >= y2; y--)
+            {
+                for (int x = 0; x <= x1 + x2; x++)
+                {
+                    // -0,1 dlatego ze skonczona dokladnosc obliczeniowa -> żeby w ostatniej linijce "p" sie wyswietlalo
+                    if (y <= vec1 * x && y >= vec2 * x && y <= (vec2 * x + wsp1) && y >= (vec1 * x + wsp2 - 0.1) && y >= vec3 * x && y <= (vec3 * x + wsp4) && y <= vec4 * x && y >= (vec4 * x + wsp3 - 0.1))
+                        Console.Write("p");
+                    else
+                        Console.Write(" ");
+                }
+                Console.WriteLine();
+           
+        }
+    }
+
         public void Console_Complex_Shape()
         {
             bool ifContinue = true;
@@ -404,7 +603,7 @@ namespace ProjektOkienkowy
 
                     for (int i = 0; i < numberOfFigures; i++)
                     {
-                        Console.Write("Enter " + (i + 1) + " figure\n1. Add circle\n2.Add triangle\n3. Add Parallelogram\n>> ");
+                        Console.Write("Enter " + (i + 1) + " figure\n1. Add circle\n2. Add triangle\n3. Add Parallelogram\n>> ");
                         tempString = Console.ReadLine();
                         option = Convert.ToInt32(tempString);
 
@@ -418,13 +617,13 @@ namespace ProjektOkienkowy
                         switch (option)
                         {
                             case 1:
-                                //  drawCircle();
+                                draw_Circle();
                                 break;
                             case 2:
-                                //  drawTriangle();
+                                draw_Triangle();
                                 break;
                             case 3:
-                                //  drawParallelogram();
+                                draw_Parallelogram();
                                 break;
                         }
                     }
@@ -505,6 +704,14 @@ namespace ProjektOkienkowy
             //        label1.Text = enter_how_many_figures.Text;
             //    }
             //}
+        }
+
+        private void Error( string ErrorMsg)
+        {
+            MyExceptions error;
+            error = new MyExceptions("My Exception Occured");
+            error.ErrorMessage = ErrorMsg;
+            throw error;
         }
     }
 }
