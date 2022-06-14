@@ -33,9 +33,9 @@ namespace ProjektOkienkowy
             this.whiteboard = new System.Windows.Forms.PictureBox();
             this.Parallelogram = new System.Windows.Forms.Button();
             this.Triangle = new System.Windows.Forms.Button();
-            this.read = new System.Windows.Forms.Button();
+            this.Circle = new System.Windows.Forms.Button();
             this.Back = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LabelOfLeftFigures = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.whiteboard)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,17 +83,17 @@ namespace ProjektOkienkowy
             this.Triangle.UseVisualStyleBackColor = false;
             this.Triangle.Click += new System.EventHandler(this.Triangle_Click);
             // 
-            // read
+            // Circle
             // 
-            this.read.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.read.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.read.Location = new System.Drawing.Point(779, 21);
-            this.read.Name = "read";
-            this.read.Size = new System.Drawing.Size(184, 51);
-            this.read.TabIndex = 8;
-            this.read.Text = "Circle";
-            this.read.UseVisualStyleBackColor = false;
-            this.read.Click += new System.EventHandler(this.Circle_Click);
+            this.Circle.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.Circle.Font = new System.Drawing.Font("Century Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.Circle.Location = new System.Drawing.Point(779, 21);
+            this.Circle.Name = "Circle";
+            this.Circle.Size = new System.Drawing.Size(184, 51);
+            this.Circle.TabIndex = 8;
+            this.Circle.Text = "Circle";
+            this.Circle.UseVisualStyleBackColor = false;
+            this.Circle.Click += new System.EventHandler(this.Circle_Click);
             // 
             // Back
             // 
@@ -106,15 +106,15 @@ namespace ProjektOkienkowy
             this.Back.UseVisualStyleBackColor = true;
             this.Back.Click += new System.EventHandler(this.back_button_click);
             // 
-            // label1
+            // LabelOfLeftFigures
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(774, 268);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(154, 30);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Figures left:   5" ;
+            this.LabelOfLeftFigures.AutoSize = true;
+            this.LabelOfLeftFigures.Font = new System.Drawing.Font("Century Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LabelOfLeftFigures.Location = new System.Drawing.Point(774, 268);
+            this.LabelOfLeftFigures.Name = "LabelOfLeftFigures";
+            this.LabelOfLeftFigures.Size = new System.Drawing.Size(181, 30);
+            this.LabelOfLeftFigures.TabIndex = 15;
+            this.LabelOfLeftFigures.Text = "Figures left:   5";
             // 
             // Complex_Shape
             // 
@@ -122,13 +122,13 @@ namespace ProjektOkienkowy
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1020, 582);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LabelOfLeftFigures);
             this.Controls.Add(this.Back);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.whiteboard);
             this.Controls.Add(this.Parallelogram);
             this.Controls.Add(this.Triangle);
-            this.Controls.Add(this.read);
+            this.Controls.Add(this.Circle);
             this.Location = new System.Drawing.Point(-50, -50);
             this.MaximumSize = new System.Drawing.Size(1038, 629);
             this.MinimumSize = new System.Drawing.Size(1038, 629);
@@ -146,8 +146,8 @@ namespace ProjektOkienkowy
         private System.Windows.Forms.PictureBox whiteboard;
         private System.Windows.Forms.Button Parallelogram;
         private System.Windows.Forms.Button Triangle;
-        private System.Windows.Forms.Button read;
+        private System.Windows.Forms.Button Circle;
         private System.Windows.Forms.Button Back;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LabelOfLeftFigures;
     }
 }

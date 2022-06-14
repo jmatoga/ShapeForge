@@ -47,12 +47,12 @@ namespace ProjektOkienkowy
             {
                 whiteboard.Image = null;
                 count = 5;
-                label1.Text = "Figures left: " + count;
+                LabelOfLeftFigures.Text = "Figures left: " + count;
                 ifClicked = 0;
                 new_beginning_x = 0;
                 new_beginning_y = 0;
                 Parallelogram.Visible = true;
-                read.Visible = true;
+                Circle.Visible = true;
                 Triangle.Visible = true;
             }
             else if (resultOfConsWindQuest == DialogResult.No)
@@ -116,13 +116,13 @@ namespace ProjektOkienkowy
                     new_beginning_y = radius / 2;
                 }
                 count--;
-                label1.Text = "Figures left: " + count;
+                LabelOfLeftFigures.Text = "Figures left: " + count;
 
                 ifClicked++;// jesli klikne to licznik w gore o jeden
             }
             else
             {
-                read.Visible = false;
+                Circle.Visible = false;
             }
 
             //}
@@ -153,20 +153,20 @@ namespace ProjektOkienkowy
             //        Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
             //        Environment.Exit(1); // zamknięcie konsoli
             //    }
+            //
+            //int length = 2 * radius + 1;
 
-            int length = 2 * radius + 1;
-
-            for (int i = 0; i < length; i++)
-            {
-                for (int j = 0; j < length; j++)
-                {
-                    if (((i - radius) * (i - radius) + (j - radius) * (j - radius)) <= (radius * radius))
-                        Console.Write("c");
-                    else
-                        Console.Write(" ");
-                }
-                Console.WriteLine(); // działa jak endl
-            }
+            //for (int i = 0; i < length; i++)
+            //{
+            //    for (int j = 0; j < length; j++)
+            //    {
+            //        if (((i - radius) * (i - radius) + (j - radius) * (j - radius)) <= (radius * radius))
+            //            Console.Write("c");
+            //        else
+            //            Console.Write(" ");
+            //    }
+            //    Console.WriteLine(); // działa jak endl
+            //}
         }
 
         private void Triangle_Click(object sender, EventArgs e)
@@ -237,7 +237,7 @@ namespace ProjektOkienkowy
                             new_beginning_y = points[2].Y;
                         }
                         count--;
-                        label1.Text = "Figures left: " + count;
+                        LabelOfLeftFigures.Text = "Figures left: " + count;
                     }
                     ifClicked++;
                 }
@@ -361,7 +361,7 @@ namespace ProjektOkienkowy
                             new_beginning_y = points[2].Y;
                         }
                         count--;
-                        label1.Text = "Figures left: " + count;
+                        LabelOfLeftFigures.Text = "Figures left: " + count;
                         ifClicked++;
                     }
                 }
@@ -433,7 +433,18 @@ namespace ProjektOkienkowy
                     tempString = Console.ReadLine();
 
                     if (tempString[0] == 'N' || tempString[0] == 'n')
+                    {
                         ifContinue = false;
+                        whiteboard.Image = null;
+                        count = 5;
+                        LabelOfLeftFigures.Text = "Figures left: " + count;
+                        ifClicked = 0;
+                        new_beginning_x = 0;
+                        new_beginning_y = 0;
+                        Parallelogram.Visible = true;
+                        Circle.Visible = true;
+                        Triangle.Visible = true;
+                    }
                     if (tempString[0] != 'Y' && tempString[0] != 'N' && tempString[0] != 'y' && tempString[0] != 'n')
                     {
                         MyExceptions error;
@@ -460,12 +471,12 @@ namespace ProjektOkienkowy
             {
                 whiteboard.Image = null;
                 count = 5;
-                label1.Text = "Figures left: " + count;
+                LabelOfLeftFigures.Text = "Figures left: " + count;
                 ifClicked = 0;
                 new_beginning_x = 0;
                 new_beginning_y = 0;
                 Parallelogram.Visible = true;
-                read.Visible = true;
+                Circle.Visible = true;
                 Triangle.Visible = true;
             }
             else if (resultOfConsWindQuest == DialogResult.No)
