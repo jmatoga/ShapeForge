@@ -368,20 +368,36 @@ namespace ProjektOkienkowy
             }
         }
 
-        public void draw_Circle()
+        public class ElementsOfFigures
         {
-            int radius = 0;
-            string tempRadius;
+            public
+            int r; // dla kólka
+            int x1, y1;
+            int x2, y2;
 
+            // konstruktor domyślny
+            public ElementsOfFigures(int t_r = 0, int t_x1 = 0, int t_y1 = 0, int t_x2 = 0, int t_y2 = 0)
+            {
+                r = t_r;
+                x1 = t_x1;
+                y1 = t_y1;
+                x2 = t_x2;
+                y2 = t_x2;
+            }
+        }
+
+        public void takeData_Circle(ElementsOfFigures[] arr, int i)
+        {
+            string tempRadius;
             Console.Clear(); // czysci konsole
             Console.Write("Enter the radius\n>> ");
 
             try
             {
                 tempRadius = Console.ReadLine();
-                radius = Convert.ToInt32(tempRadius);
+                arr[i].r = Convert.ToInt32(tempRadius);
 
-                if (radius <= 0)
+                if (arr[i].r <= 0)
                 {
                     MyExceptions error;
                     error = new MyExceptions("My Exception Occured");
@@ -395,7 +411,10 @@ namespace ProjektOkienkowy
                 Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
                 Environment.Exit(1); // zamknięcie konsoli
             }
+        }
 
+        public void draw_Circle(int radius)
+        {
             int length = 2 * radius + 1;
 
             for (int i = 0; i < length; i++)
@@ -436,7 +455,7 @@ namespace ProjektOkienkowy
 
                     // sprawdzamy założenia
                     if (i == 3 && args[3] >= 0)
-                        Error( "Error! Y2 must be negativ intiger");
+                        Error("Error! Y2 must be negativ intiger");
 
                     if (i < 3 && args[i] < 0)
                     {
@@ -563,9 +582,9 @@ namespace ProjektOkienkowy
                         Console.Write(" ");
                 }
                 Console.WriteLine();
-           
+
+            }
         }
-    }
 
         public void Console_Complex_Shape()
         {
@@ -576,7 +595,9 @@ namespace ProjektOkienkowy
                 AllocConsole(); // otwiera konsole
 
                 int numberOfFigures = 0, option = 0;
+                int numberOfCircles = 0, numbersOfTriangles = 0, numbersOfParallelograms = 0; // zmienne potrzebne do przechowywania informacji o ilosci typow figur do narysowania
                 string tempString;
+                string drawInOrder = ""; // zmienna pozwalajaca rysowac w kolejnosci podanej przez użytkownika
 
                 Console.Clear(); // czysci konsole
                 Console.Write("Enter the number of figures you want to draw (max 5)\n>> ");
@@ -601,6 +622,8 @@ namespace ProjektOkienkowy
                         throw error;
                     }
 
+                    ElementsOfFigures[] arr = new ElementsOfFigures[numberOfFigures]; // tworzymy tablice klas
+
                     for (int i = 0; i < numberOfFigures; i++)
                     {
                         Console.Write("Enter " + (i + 1) + " figure\n1. Add circle\n2. Add triangle\n3. Add Parallelogram\n>> ");
@@ -617,14 +640,38 @@ namespace ProjektOkienkowy
                         switch (option)
                         {
                             case 1:
-                                draw_Circle();
+                                numberOfCircles++;
+                                drawInOrder += 'c';
+                                takeData_Circle(arr, i);
                                 break;
                             case 2:
-                                draw_Triangle();
+                                numbersOfTriangles++;
+                                drawInOrder += 't';
                                 break;
                             case 3:
-                                draw_Parallelogram();
+                                numbersOfParallelograms++;
+                                drawInOrder += 'p';
                                 break;
+                        }
+                    }
+
+                    // rysowanie polaczonej figury
+                    for (int i = 0; i < numberOfFigures; i++)
+                    {
+                        if (numberOfCircles > 0 && drawInOrder[i] == 'c')
+                        {
+                            draw_Circle(arr[i].r);
+                            numberOfCircles--;
+                        }
+                        else if (numbersOfTriangles > 0 && drawInOrder[i] == 't')
+                        {
+                            draw_Triangle();
+                            numbersOfTriangles--;
+                        }
+                        else if (numbersOfParallelograms > 0 && drawInOrder[i] == 'p')
+                        {
+                            draw_Parallelogram();
+                            numbersOfParallelograms--;
                         }
                     }
 
@@ -706,7 +753,7 @@ namespace ProjektOkienkowy
             //}
         }
 
-        private void Error( string ErrorMsg)
+        private void Error(string ErrorMsg)
         {
             MyExceptions error;
             error = new MyExceptions("My Exception Occured");
