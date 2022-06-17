@@ -394,8 +394,8 @@ namespace ProjektOkienkowy
 
             try
             {
-                tempRadius = Console.ReadLine();
-                arr[i].r = Convert.ToInt32(tempRadius);
+               tempRadius = Console.ReadLine();
+                arr[i] =new ElementsOfFigures( Convert.ToInt32(tempRadius));
 
                 if (arr[i].r <= 0)
                 {
@@ -642,6 +642,7 @@ namespace ProjektOkienkowy
                             case 1:
                                 numberOfCircles++;
                                 drawInOrder += 'c';
+                                
                                 takeData_Circle(arr, i);
                                 break;
                             case 2:
