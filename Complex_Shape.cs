@@ -370,10 +370,13 @@ namespace ProjektOkienkowy
 
         public class ElementsOfFigures
         {
-            public
-            int r; // dla kólka
-            int x1, y1;
-            int x2, y2;
+          // public nie na górze, tylko przed tworzeniem zmienncyh, bo działa inaczej niż w c++
+          public int r; // dla kólka
+          public int x1, y1;
+          public  int x2, y2;
+          public double dx1, dy1;
+          public double dx2, dy2;
+
 
             // konstruktor domyślny
             public ElementsOfFigures(int t_r = 0, int t_x1 = 0, int t_y1 = 0, int t_x2 = 0, int t_y2 = 0)
@@ -384,6 +387,15 @@ namespace ProjektOkienkowy
                 x2 = t_x2;
                 y2 = t_x2;
             }
+
+            public ElementsOfFigures(double p_x1 = 0, double p_y1 = 0, double p_x2 = 0, double p_y2 = 0)
+            {
+                dx1 = p_x1;
+                dy1 = p_y1;
+                dx2 = p_x2;
+                dy2 = p_x2;
+            }
+
         }
 
         public void takeData_Circle(ElementsOfFigures[] arr, int i)
@@ -430,9 +442,9 @@ namespace ProjektOkienkowy
             }
         }
 
-        public void draw_Triangle()
+        public void takeData_Triangle(ElementsOfFigures[] args, int j)
         {
-            int[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+        //   int[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
             string tempArg;
 
             Console.Clear(); // czysci konsole
@@ -451,27 +463,41 @@ namespace ProjektOkienkowy
                         Console.Write("Enter Y2\n>> ");
 
                     tempArg = Console.ReadLine();
-                    args[i] = Convert.ToInt32(tempArg);
 
+                    if (i == 0)
+                        args[j] = new ElementsOfFigures(0, Convert.ToInt32(tempArg));
+                    if (i == 1)
+                        args[j].y1 = Convert.ToInt32(tempArg);
+                    if (i == 2)
+                        args[j].x2 = Convert.ToInt32(tempArg);
+                    if (i == 3)
+                        args[j].y2 = Convert.ToInt32(tempArg);
+                 
                     // sprawdzamy założenia
-                    if (i == 3 && args[3] >= 0)
+                    if (i == 3 && args[j].y2 >= 0)
                         Error("Error! Y2 must be negativ intiger");
-
-                    if (i < 3 && args[i] < 0)
+                    
+                    // trzeba zrobic 3 ify zamiast jeden bo trzeba sie jakos odwolywac to elemntow klasy x1 y1 x2
+                    if (i == 0 && args[j].x1 < 0)
                     {
-                        string temp = "Wrong Value";
                         if (i == 0)
-                            temp = "X1";
-                        else if (i == 1)
-                            temp = "Y1";
-                        else if (i == 2)
-                            temp = "X2";
-
-                        Error("Error! " + temp + " can't be negativ intiger");
+                        Error("Error! X1 can't be negativ intiger");
                     }
-                    if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
+                    if (i == 1 && args[j].y1 < 0)
+                    {
+                        if (i == 1)
+                        Error("Error! Y1 can't be negativ intiger");
+                    }
+                    if (i == 2 && args[j].x2 < 0)
+                    {
+                       if (i == 2)
+                        Error("Error! X2 can't be negativ intiger");
+                    }
+
+                    if (i == 3 && (args[j].x1 == args[j].y1 || args[j].x2 == args[j].y2))
                         Error("Error! Badly matched coefficients");
                 }
+
             }
             catch (MyExceptions error)
             {
@@ -479,15 +505,12 @@ namespace ProjektOkienkowy
                 Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
                 Environment.Exit(1); // zamknięcie konsoli
             }
+        }
 
-            int height = args[1] - args[3]; // - ponieważ y2 musi byc wartoscia ujemna
-            int width = args[0] + args[2];
-
-            // przypisywanie wartości wpisane przez użytkownika do zmiennych x1,y1,x2,y2 zeby bylo wygodniej
-            int x1 = args[0];
-            int y1 = args[1];
-            int x2 = args[2];
-            int y2 = args[3];
+        public void draw_Triangle(int x1, int y1, int x2, int y2)
+        {
+           // int height = args[1] - args[3]; // - ponieważ y2 musi byc wartoscia ujemna
+          //  int width = args[0] + args[2];
 
             double vec1 = y1 / Convert.ToDouble(x1);
             double vec2 = y2 / Convert.ToDouble(x2);
@@ -506,9 +529,9 @@ namespace ProjektOkienkowy
             }
         }
 
-        public void draw_Parallelogram()
+        public void takeData_Parallelogram(ElementsOfFigures[] d_args, int j)
         {
-            double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
+           // double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
             string tempArg;
 
             Console.Clear(); // czysci konsole
@@ -527,25 +550,41 @@ namespace ProjektOkienkowy
                         Console.Write("Enter Y2\n>> ");
 
                     tempArg = Console.ReadLine();
-                    args[i] = Convert.ToInt32(tempArg);
+                    
+                    if (i == 0)
+                        d_args[j] = new ElementsOfFigures(Convert.ToDouble(tempArg));
+                    if (i == 1)
+                        d_args[j].dy1= Convert.ToDouble(tempArg);
+                    if (i == 2)
+                        d_args[j].dx2 = Convert.ToDouble(tempArg);
+                    if (i == 3)
+                        d_args[j].dy2 = Convert.ToDouble(tempArg);
 
-                    if (i == 3 && args[3] >= 0)
+                    // sprawdzamy założenia
+                    if (i == 3 && d_args[j].dy2 >= 0)
                         Error("Error! Y2 must be negativ intiger");
-                    if (i < 3 && args[i] < 0)
-                    {
-                        string temp = "Wrong Value";
-                        if (i == 0)
-                            temp = "X1";
-                        else if (i == 1)
-                            temp = "Y1";
-                        else if (i == 2)
-                            temp = "X2";
 
-                        Error("Error! " + temp + " can't be negativ intiger");
+                    // trzeba zrobic 3 ify zamiast jeden bo trzeba sie jakos odwolywac to elemntow klasy x1 y1 x2
+                    if (i == 0 && d_args[j].dx1 < 0)
+                    {
+                        if (i == 0)
+                            Error("Error! X1 can't be negativ intiger");
                     }
-                    if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
+                    if (i == 1 && d_args[j].dy1 < 0)
+                    {
+                        if (i == 1)
+                            Error("Error! Y1 can't be negativ intiger");
+                    }
+                    if (i == 2 && d_args[j].dx2 < 0)
+                    {
+                        if (i == 2)
+                            Error("Error! X2 can't be negativ intiger");
+                    }
+
+                    if (i == 3 && (d_args[j].dx1 == d_args[j].dy1 || d_args[j].dx2 == d_args[j].dy2))
                         Error("Error! Badly matched coefficients");
                 }
+
             }
             catch (MyExceptions error)
             {
@@ -553,27 +592,24 @@ namespace ProjektOkienkowy
                 Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
                 Environment.Exit(1); // zamknięcie konsoli
             }
+        }
 
-            // przypisywanie wartości wpisane przez użytkownika do zmiennych x1,y1,x2,y2 zeby bylo wygodniej
-            double x1 = args[0];
-            double y1 = args[1];
-            double x2 = args[2];
-            double y2 = args[3];
-
-            double vec1 = y1 / x1;
-            double vec2 = y2 / x2;
-            double vec3 = y1 / (-x2);
-            double vec4 = y2 / (-x1);
+        public void draw_Parallelogram(double dx1, double dy1, double dx2, double dy2)
+        {
+            double vec1 = dy1 / dx1;
+            double vec2 = dy2 / dx2;
+            double vec3 = dy1 / (-dx2);
+            double vec4 = dy2 / (-dx1);
 
             // wspolczynniki
-            double wsp1 = Convert.ToDouble(y1 - x1 * vec2);
-            double wsp2 = Convert.ToDouble(y2 - x2 * vec1);
-            double wsp3 = Convert.ToDouble(y2 - x2 * vec4);
-            double wsp4 = Convert.ToDouble(y1 - x1 * vec3);
+            double wsp1 = Convert.ToDouble(dy1 - dx1 * vec2);
+            double wsp2 = Convert.ToDouble(dy2 - dx2 * vec1);
+            double wsp3 = Convert.ToDouble(dy2 - dx2 * vec4);
+            double wsp4 = Convert.ToDouble(dy1 - dx1 * vec3);
 
-            for (int y = Convert.ToInt32(y1); y >= y2; y--)
+            for (int y = Convert.ToInt32(dy1); y >= dy2; y--)
             {
-                for (int x = 0; x <= x1 + x2; x++)
+                for (int x = 0; x <= dx1 + dx2; x++)
                 {
                     // -0,1 dlatego ze skonczona dokladnosc obliczeniowa -> żeby w ostatniej linijce "p" sie wyswietlalo
                     if (y <= vec1 * x && y >= vec2 * x && y <= (vec2 * x + wsp1) && y >= (vec1 * x + wsp2 - 0.1) && y >= vec3 * x && y <= (vec3 * x + wsp4) && y <= vec4 * x && y >= (vec4 * x + wsp3 - 0.1))
@@ -642,16 +678,17 @@ namespace ProjektOkienkowy
                             case 1:
                                 numberOfCircles++;
                                 drawInOrder += 'c';
-                                
                                 takeData_Circle(arr, i);
                                 break;
                             case 2:
                                 numbersOfTriangles++;
                                 drawInOrder += 't';
+                                takeData_Triangle(arr,i);
                                 break;
                             case 3:
                                 numbersOfParallelograms++;
                                 drawInOrder += 'p';
+                                takeData_Parallelogram(arr, i);
                                 break;
                         }
                     }
@@ -662,16 +699,19 @@ namespace ProjektOkienkowy
                         if (numberOfCircles > 0 && drawInOrder[i] == 'c')
                         {
                             draw_Circle(arr[i].r);
+                            Console.Write("\n\n");
                             numberOfCircles--;
                         }
                         else if (numbersOfTriangles > 0 && drawInOrder[i] == 't')
                         {
-                            draw_Triangle();
+                            draw_Triangle(arr[i].x1, arr[i].y1, arr[i].x2, arr[i].y2);
+                            Console.Write("\n\n");
                             numbersOfTriangles--;
                         }
                         else if (numbersOfParallelograms > 0 && drawInOrder[i] == 'p')
                         {
-                            draw_Parallelogram();
+                            draw_Parallelogram(arr[i].dx1, arr[i].dy1, arr[i].dx2, arr[i].dy2);
+                            Console.Write("\n\n");
                             numbersOfParallelograms--;
                         }
                     }
