@@ -67,7 +67,7 @@ namespace ProjektOkienkowy
                 }
 
                 g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                g.DrawEllipse(pen_circle, 0, 0, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+                g.DrawEllipse(pen_circle, 200,180, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
             }
             else if (resultOfConsWindQuest == DialogResult.No)
             {
@@ -195,7 +195,8 @@ namespace ProjektOkienkowy
                         int y2_int = Convert.ToInt32(args[3]);
 
                         g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                        Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków trójkąta
+                        Point[] points = new Point[] { new Point { X = 0+200, Y = 277-y1_int }, new Point { X = x1_int + 200, Y = 277 + y1_int - y1_int }, new Point { X = x2_int + 200, Y =277+ y2_int - y1_int } }; // ustawianie wierzchołków trójkąta
+                                                                                                                                                                                                                                                                  //  Y =277, Y=277+y2_int zeby (0,0) było od srodka,a nie lewy górny , bo caly rizmiar y to 555 /2 =277
                         g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                     }
                 }
@@ -409,7 +410,7 @@ namespace ProjektOkienkowy
                         int y2_int = Convert.ToInt32(args[3]);
 
                         g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                        Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x1_int + x2_int, Y = y1_int + y2_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków równoległoboku
+                        Point[] points = new Point[] { new Point { X = 200, Y = 277 - y1_int }, new Point { X = x1_int+ 200, Y = 277 + y1_int - y1_int }, new Point { X = x1_int + 200 + x2_int, Y = 277 + y1_int + y2_int - y1_int }, new Point { X = x2_int + 200, Y = 277 + y2_int - y1_int } }; // ustawianie wierzchołków równoległoboku
                         g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                     }
                 }

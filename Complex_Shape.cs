@@ -223,7 +223,7 @@ namespace ProjektOkienkowy
                         if (ifClicked == 0)
                         {
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                            Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = x1_int, Y = y1_int }, new Point { X = x2_int, Y = y2_int } }; // ustawianie wierzchołków trójkąta
+                            Point[] points = new Point[] { new Point { X = 0, Y = 277 - y1_int }, new Point { X = x1_int, Y = y1_int + 277 - y1_int }, new Point { X = x2_int, Y = y2_int + 277 - y1_int } }; // ustawianie wierzchołków trójkąta
                             new_beginning_x = points[2].X; // zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
                             g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki )
@@ -355,7 +355,7 @@ namespace ProjektOkienkowy
                         else
                         {
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                            Point[] points = new Point[] { new Point { X = 0, Y = 0 }, new Point { X = new_beginning_x + x1_int, Y = new_beginning_y + y1_int }, new Point { X = new_beginning_x + x1_int + x2_int, Y = new_beginning_y + y1_int + y2_int }, new Point { X = new_beginning_x + x2_int, Y = new_beginning_y + y2_int } }; // ustawianie wierzchołków równoległoboku
+                            Point[] points = new Point[] { new Point { X = 0, Y = 277-y1_int  }, new Point { X = new_beginning_x + x1_int, Y = 277 - y1_int + new_beginning_y + y1_int }, new Point { X = new_beginning_x + x1_int + x2_int, Y = 277 + new_beginning_y -y1_int+ y1_int + y2_int }, new Point { X = new_beginning_x + x2_int, Y = 277 - y1_int + new_beginning_y + y2_int } }; // ustawianie wierzchołków równoległoboku
                             g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku rownoleglobok bo 4 wierzchołki)
                             new_beginning_x = points[2].X; // zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
