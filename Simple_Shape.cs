@@ -269,7 +269,6 @@ namespace ProjektOkienkowy
                 {
                     for (int x = 0; x <= x1 + x2; x++) // x = 0 bo nie moze byc ujemny, x<=x1+x2 żeby x nie wyszedł poza krawedzie trojkata 
                     {
-
                         if (y <= vec1 * x && y >= (vec2 * x) && x <= (x1 - vec3 * (y1 - y)))
                             Console.Write("t");
                         else

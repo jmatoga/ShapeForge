@@ -111,70 +111,23 @@ namespace ProjektOkienkowy
                     g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
                     g.DrawEllipse(pen_circle, 0, 0, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
 
-                    // zeby nowa figura byla na srednicy a nie kwadracie
+                    // zeby nowa figura zaczynala sie od konca srednicy a nie kwadratu
                     new_beginning_x = radius;
                     new_beginning_y = radius / 2;
                 }
                 count--;
                 LabelOfLeftFigures.Text = "Figures left: " + count;
 
-                ifClicked++;// jesli klikne to licznik w gore o jeden
+                ifClicked++; // jesli klikne to licznik w gore o jeden
             }
             else
-            {
                 Circle.Visible = false;
-            }
-
-            //}
-            //else if (resultOfConsWindQuest == DialogResult.No)
-            //{
-            //    AllocConsole(); // otwiera konsole
-            //    int radius = 0;
-            //    string tempRadius;
-
-            //    Console.Clear(); // czysci konsole
-            //    Console.Write("Enter the radius\n>> ");
-
-            //    try
-            //    {
-            //        tempRadius = Console.ReadLine();
-            //        radius = Convert.ToInt32(tempRadius);
-
-            //        if (radius <= 0)
-            //        {
-            //            MyExceptions error;
-            //            error = new MyExceptions();
-            //            throw error;
-            //        }
-            //    }
-            //    catch
-            //    {
-            //        Console.WriteLine("Error! Radius can't be zero!");
-            //        Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-            //        Environment.Exit(1); // zamknięcie konsoli
-            //    }
-            //
-            //int length = 2 * radius + 1;
-
-            //for (int i = 0; i < length; i++)
-            //{
-            //    for (int j = 0; j < length; j++)
-            //    {
-            //        if (((i - radius) * (i - radius) + (j - radius) * (j - radius)) <= (radius * radius))
-            //            Console.Write("c");
-            //        else
-            //            Console.Write(" ");
-            //    }
-            //    Console.WriteLine(); // działa jak endl
-            //}
         }
 
         private void Triangle_Click(object sender, EventArgs e)
         {
             if (count == 0)
-            {
-                Triangle.Visible = false;//chowam guzik jesli nie moge juz wiecej figur miec
-            }
+                Triangle.Visible = false; // chowam guzik jesli skonczyla sie liczba figur mozliwych do narysowania
             else
             {
                 string message = "Please enter the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
@@ -201,7 +154,7 @@ namespace ProjektOkienkowy
                         string stringValue1 = (string)Value1;
 
                         TakeData(sender, e, stringValue, args, 0, 1); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
-                        TakeData(sender, e, stringValue1, args, 2, 3); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
+                        TakeData(sender, e, stringValue1, args, 2, 3); // pobieranie danych od uzytkownika (2,3) ktore dane z args maja brac pod uwage
 
                         // sprawdzam czy podana wartosc jest intem
                         for (int i = 0; i < stringValue.Length; i++)
@@ -297,9 +250,7 @@ namespace ProjektOkienkowy
         private void Parallelogram_Click(object sender, EventArgs e)
         {
             if (count == 0)
-            {
                 Parallelogram.Visible = false;
-            }
             else
             {
                 string message = "Please enter the X coords and Y coords:", title = "Taking data", defaultValue = "For example 1 3";
@@ -325,7 +276,7 @@ namespace ProjektOkienkowy
                         string stringValue1 = (string)Value1;
 
                         TakeData(sender, e, stringValue, args, 0, 1); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
-                        TakeData(sender, e, stringValue1, args, 2, 3); // pobieranie danych od uzytkownika (0,1) ktore dane z args maja brac pod uwage
+                        TakeData(sender, e, stringValue1, args, 2, 3); // pobieranie danych od uzytkownika (2,3) ktore dane z args maja brac pod uwage
 
                         // sprawdzam czy podana wartosc jest intem
                         for (int i = 0; i < stringValue.Length; i++)
@@ -355,7 +306,7 @@ namespace ProjektOkienkowy
                         else
                         {
                             g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                            Point[] points = new Point[] { new Point { X = 0, Y = 277-y1_int  }, new Point { X = new_beginning_x + x1_int, Y = 277 - y1_int + new_beginning_y + y1_int }, new Point { X = new_beginning_x + x1_int + x2_int, Y = 277 + new_beginning_y -y1_int+ y1_int + y2_int }, new Point { X = new_beginning_x + x2_int, Y = 277 - y1_int + new_beginning_y + y2_int } }; // ustawianie wierzchołków równoległoboku
+                            Point[] points = new Point[] { new Point { X = 0, Y = 277 - y1_int }, new Point { X = new_beginning_x + x1_int, Y = 277 - y1_int + new_beginning_y + y1_int }, new Point { X = new_beginning_x + x1_int + x2_int, Y = 277 + new_beginning_y - y1_int + y1_int + y2_int }, new Point { X = new_beginning_x + x2_int, Y = 277 - y1_int + new_beginning_y + y2_int } }; // ustawianie wierzchołków równoległoboku
                             g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku rownoleglobok bo 4 wierzchołki)
                             new_beginning_x = points[2].X; // zapamietuje poprzednie zeby byly poczatkiem nastepnego
                             new_beginning_y = points[2].Y;
@@ -370,13 +321,12 @@ namespace ProjektOkienkowy
 
         public class ElementsOfFigures
         {
-          // public nie na górze, tylko przed tworzeniem zmienncyh, bo działa inaczej niż w c++
-          public int r; // dla kólka
-          public int x1, y1;
-          public  int x2, y2;
-          public double dx1, dy1;
-          public double dx2, dy2;
-
+            // public nie na górze, tylko przed tworzeniem zmienncyh, bo działa inaczej niż w c++
+            public int r; // dla kólka
+            public int x1, y1; // dla trójkąta
+            public int x2, y2;
+            public double dx1, dy1; // dla równoległoboku
+            public double dx2, dy2;
 
             // konstruktor domyślny
             public ElementsOfFigures(int t_r = 0, int t_x1 = 0, int t_y1 = 0, int t_x2 = 0, int t_y2 = 0)
@@ -395,7 +345,6 @@ namespace ProjektOkienkowy
                 dx2 = p_x2;
                 dy2 = p_x2;
             }
-
         }
 
         public void takeData_Circle(ElementsOfFigures[] arr, int i)
@@ -406,8 +355,8 @@ namespace ProjektOkienkowy
 
             try
             {
-               tempRadius = Console.ReadLine();
-                arr[i] =new ElementsOfFigures( Convert.ToInt32(tempRadius));
+                tempRadius = Console.ReadLine();
+                arr[i] = new ElementsOfFigures(Convert.ToInt32(tempRadius));
 
                 if (arr[i].r <= 0)
                 {
@@ -444,9 +393,7 @@ namespace ProjektOkienkowy
 
         public void takeData_Triangle(ElementsOfFigures[] args, int j)
         {
-        //   int[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
             string tempArg;
-
             Console.Clear(); // czysci konsole
 
             try
@@ -472,32 +419,22 @@ namespace ProjektOkienkowy
                         args[j].x2 = Convert.ToInt32(tempArg);
                     if (i == 3)
                         args[j].y2 = Convert.ToInt32(tempArg);
-                 
+
                     // sprawdzamy założenia
                     if (i == 3 && args[j].y2 >= 0)
                         Error("Error! Y2 must be negativ intiger");
-                    
-                    // trzeba zrobic 3 ify zamiast jeden bo trzeba sie jakos odwolywac to elemntow klasy x1 y1 x2
+
+                    // trzeba zrobic 3 ify zamiast jednego bo trzeba sie jakos odwolywac do elemntow klasy (x1 y1 x2 y2)
                     if (i == 0 && args[j].x1 < 0)
-                    {
-                        if (i == 0)
-                        Error("Error! X1 can't be negativ intiger");
-                    }
+                            Error("Error! X1 can't be negativ intiger");
                     if (i == 1 && args[j].y1 < 0)
-                    {
-                        if (i == 1)
-                        Error("Error! Y1 can't be negativ intiger");
-                    }
+                            Error("Error! Y1 can't be negativ intiger");
                     if (i == 2 && args[j].x2 < 0)
-                    {
-                       if (i == 2)
-                        Error("Error! X2 can't be negativ intiger");
-                    }
+                            Error("Error! X2 can't be negativ intiger");
 
                     if (i == 3 && (args[j].x1 == args[j].y1 || args[j].x2 == args[j].y2))
                         Error("Error! Badly matched coefficients");
                 }
-
             }
             catch (MyExceptions error)
             {
@@ -509,12 +446,9 @@ namespace ProjektOkienkowy
 
         public void draw_Triangle(int x1, int y1, int x2, int y2)
         {
-           // int height = args[1] - args[3]; // - ponieważ y2 musi byc wartoscia ujemna
-          //  int width = args[0] + args[2];
-
             double vec1 = y1 / Convert.ToDouble(x1);
             double vec2 = y2 / Convert.ToDouble(x2);
-            double vec3 = (x2 - x1) / Convert.ToDouble((y2 - y1)); // obliczony 3 wektor (czyli na obrazku  z polecenia to prawa dolna krawedz trojkata)
+            double vec3 = (x2 - x1) / Convert.ToDouble((y2 - y1)); // obliczony 3 wektor (czyli na obrazku z polecenia to prawa dolna krawedz trojkata)
 
             for (int y = y1; y >= y2; y--) // od górnego y do dolnego y -> czyli po całej długości igreków(y) przechodzimy
             {
@@ -531,9 +465,7 @@ namespace ProjektOkienkowy
 
         public void takeData_Parallelogram(ElementsOfFigures[] d_args, int j)
         {
-           // double[] args = { 0, 0, 0, 0 }; // argumenty x1, y1, x2, y2
             string tempArg;
-
             Console.Clear(); // czysci konsole
 
             try
@@ -550,11 +482,11 @@ namespace ProjektOkienkowy
                         Console.Write("Enter Y2\n>> ");
 
                     tempArg = Console.ReadLine();
-                    
+
                     if (i == 0)
                         d_args[j] = new ElementsOfFigures(Convert.ToDouble(tempArg));
                     if (i == 1)
-                        d_args[j].dy1= Convert.ToDouble(tempArg);
+                        d_args[j].dy1 = Convert.ToDouble(tempArg);
                     if (i == 2)
                         d_args[j].dx2 = Convert.ToDouble(tempArg);
                     if (i == 3)
@@ -564,27 +496,17 @@ namespace ProjektOkienkowy
                     if (i == 3 && d_args[j].dy2 >= 0)
                         Error("Error! Y2 must be negativ intiger");
 
-                    // trzeba zrobic 3 ify zamiast jeden bo trzeba sie jakos odwolywac to elemntow klasy x1 y1 x2
+                    // trzeba zrobic 3 ify zamiast jeden bo trzeba sie jakos odwolywac do elemntow klasy x1 y1 x2
                     if (i == 0 && d_args[j].dx1 < 0)
-                    {
-                        if (i == 0)
                             Error("Error! X1 can't be negativ intiger");
-                    }
                     if (i == 1 && d_args[j].dy1 < 0)
-                    {
-                        if (i == 1)
                             Error("Error! Y1 can't be negativ intiger");
-                    }
                     if (i == 2 && d_args[j].dx2 < 0)
-                    {
-                        if (i == 2)
                             Error("Error! X2 can't be negativ intiger");
-                    }
 
                     if (i == 3 && (d_args[j].dx1 == d_args[j].dy1 || d_args[j].dx2 == d_args[j].dy2))
                         Error("Error! Badly matched coefficients");
                 }
-
             }
             catch (MyExceptions error)
             {
@@ -618,7 +540,6 @@ namespace ProjektOkienkowy
                         Console.Write(" ");
                 }
                 Console.WriteLine();
-
             }
         }
 
@@ -683,7 +604,7 @@ namespace ProjektOkienkowy
                             case 2:
                                 numbersOfTriangles++;
                                 drawInOrder += 't';
-                                takeData_Triangle(arr,i);
+                                takeData_Triangle(arr, i);
                                 break;
                             case 3:
                                 numbersOfParallelograms++;
@@ -694,6 +615,7 @@ namespace ProjektOkienkowy
                     }
 
                     // rysowanie polaczonej figury
+                    Console.Clear(); // czysci konsole
                     for (int i = 0; i < numberOfFigures; i++)
                     {
                         if (numberOfCircles > 0 && drawInOrder[i] == 'c')
@@ -748,7 +670,6 @@ namespace ProjektOkienkowy
                 }
             }
         }
-
         private void Clear_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
@@ -768,30 +689,6 @@ namespace ProjektOkienkowy
             }
             else if (resultOfConsWindQuest == DialogResult.No)
                 Console_Complex_Shape();
-
-
-            //DO WYWALENIA
-            //    private void Circle_Click(object sender, EventArgs e)
-            //    {
-            //        //label1.Text = enter_how_many_figures.Text;
-            //        data = enter_how_many_figures.Text;
-            //        if(data == "d")
-            //            this.Hide();
-            //    }
-
-            //    private void enter_how_many_figures_keyDown(object sender, KeyEventArgs e)
-            //    {
-            //        if(e.KeyCode == Keys.Enter)
-            //        {
-            //            MessageBox.Show("dasda");
-            //        }
-            //    }
-
-            //    private void enter_how_many_figures_TextChanged(object sender, EventArgs e)
-            //    {
-            //        label1.Text = enter_how_many_figures.Text;
-            //    }
-            //}
         }
 
         private void Error(string ErrorMsg)
