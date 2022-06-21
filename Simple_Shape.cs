@@ -60,14 +60,14 @@ namespace ProjektOkienkowy
                         if (stringValue[i] < 48 || stringValue[i] > 57)
                         {
                             Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                            Environment.Exit(1);
+                            Application.Exit();
                         }
 
                     radius = Int32.Parse(Value.ToString()); // konwertuje ze stringa do int i przypisuje do wartosci radius
                 }
 
                 g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                g.DrawEllipse(pen_circle, 200,180, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+                g.DrawEllipse(pen_circle, 200, 180, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
             }
             else if (resultOfConsWindQuest == DialogResult.No)
             {
@@ -95,7 +95,7 @@ namespace ProjektOkienkowy
                 {
                     Console.WriteLine(error.ErrorMessage);
                     Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                    Environment.Exit(1); // zamknięcie konsoli
+                    Application.Exit(); // zamknięcie konsoli
                 }
 
                 int length = 2 * radius + 1;
@@ -156,7 +156,7 @@ namespace ProjektOkienkowy
                             if (stringValue[i] < 32 || (stringValue[i] > 32 && stringValue[i] < 45 && stringValue[i] > 45 && stringValue[i] < 48) || stringValue[i] > 57)
                             {
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                         }
 
@@ -166,7 +166,7 @@ namespace ProjektOkienkowy
                             if (i == 3 && args[3] >= 0)
                             {
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! Y2 must be negativ intiger", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                             if (i < 3 && args[i] < 0)
                             {
@@ -179,12 +179,12 @@ namespace ProjektOkienkowy
                                     temp = "X2";
 
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! " + temp + " can't be negativ intiger", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                             if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
                             {
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! Badly matched coefficients", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                         }
 
@@ -195,8 +195,8 @@ namespace ProjektOkienkowy
                         int y2_int = Convert.ToInt32(args[3]);
 
                         g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                        Point[] points = new Point[] { new Point { X = 0+200, Y = 277-y1_int }, new Point { X = x1_int + 200, Y = 277 + y1_int - y1_int }, new Point { X = x2_int + 200, Y =277+ y2_int - y1_int } }; // ustawianie wierzchołków trójkąta
-                                                                                                                                                                                                                                                                  //  Y =277, Y=277+y2_int zeby (0,0) było od srodka,a nie lewy górny , bo caly rizmiar y to 555 /2 =277
+                        Point[] points = new Point[] { new Point { X = 0 + 200, Y = 277 - y1_int }, new Point { X = x1_int + 200, Y = 277 + y1_int - y1_int }, new Point { X = x2_int + 200, Y = 277 + y2_int - y1_int } }; // ustawianie wierzchołków trójkąta
+                                                                                                                                                                                                                            //  Y =277, Y=277+y2_int zeby (0,0) było od srodka,a nie lewy górny , bo caly rizmiar y to 555 /2 =277
                         g.DrawPolygon(pen_triangle, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                     }
                 }
@@ -249,7 +249,7 @@ namespace ProjektOkienkowy
                 {
                     Console.WriteLine(error.ErrorMessage);
                     Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                    Environment.Exit(1); // zamknięcie konsoli
+                    Application.Exit(); // zamknięcie konsoli
                 }
 
                 int height = args[1] - args[3]; // - ponieważ y2 musi byc wartoscia ujemna
@@ -370,7 +370,7 @@ namespace ProjektOkienkowy
                             if (stringValue[i] < 32 || (stringValue[i] > 32 && stringValue[i] < 45 && stringValue[i] > 45 && stringValue[i] < 48) || stringValue[i] > 57)
                             {
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                         }
 
@@ -380,7 +380,7 @@ namespace ProjektOkienkowy
                             if (i == 3 && args[3] >= 0)
                             {
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! Y2 must be negativ intiger", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                             if (i < 3 && args[i] < 0)
                             {
@@ -393,12 +393,12 @@ namespace ProjektOkienkowy
                                     temp = "X2";
 
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! " + temp + " can't be negativ intiger", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                             if (i == 3 && (args[0] == args[1] || args[2] == args[3]))
                             {
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! Badly matched coefficients", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                         }
 
@@ -409,7 +409,7 @@ namespace ProjektOkienkowy
                         int y2_int = Convert.ToInt32(args[3]);
 
                         g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                        Point[] points = new Point[] { new Point { X = 200, Y = 277 - y1_int }, new Point { X = x1_int+ 200, Y = 277 + y1_int - y1_int }, new Point { X = x1_int + 200 + x2_int, Y = 277 + y1_int + y2_int - y1_int }, new Point { X = x2_int + 200, Y = 277 + y2_int - y1_int } }; // ustawianie wierzchołków równoległoboku
+                        Point[] points = new Point[] { new Point { X = 200, Y = 277 - y1_int }, new Point { X = x1_int + 200, Y = 277 + y1_int - y1_int }, new Point { X = x1_int + 200 + x2_int, Y = 277 + y1_int + y2_int - y1_int }, new Point { X = x2_int + 200, Y = 277 + y2_int - y1_int } }; // ustawianie wierzchołków równoległoboku
                         g.DrawPolygon(pen_figure, points); // rysowanie wielokąta (w tym przypadku trójkąt bo 3 wierzchołki)
                     }
                 }
@@ -460,7 +460,7 @@ namespace ProjektOkienkowy
                 {
                     Console.WriteLine(error.ErrorMessage);
                     Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                    Environment.Exit(1); // zamknięcie konsoli
+                    Application.Exit(); // zamknięcie konsoli
                 }
 
                 // przypisywanie wartości wpisane przez użytkownika do zmiennych x1,y1,x2,y2 zeby bylo wygodniej
@@ -471,7 +471,7 @@ namespace ProjektOkienkowy
 
                 double vec1 = y1 / x1;
                 double vec2 = y2 / x2;
-                double vec3 = y1 /(-x2);
+                double vec3 = y1 / (-x2);
                 double vec4 = y2 / (-x1);
 
                 // wspolczynniki
@@ -497,9 +497,16 @@ namespace ProjektOkienkowy
 
         private void Complex_Click(object sender, EventArgs e)
         {
-            Complex_Shape complex_shape_window = new Complex_Shape();
-            complex_shape_window.Show();
-            this.Hide();
+            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
+            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
+
+            // jesli sie kliknie tak lub nie to przchodzi sie do complexShape a jesli sie kliknie x lub anuluj to zamyka okienko z pytaniem
+            if (resultOfConsWindQuest == DialogResult.Yes || resultOfConsWindQuest == DialogResult.No)
+            {
+                Complex_Shape complex_shape_window = new Complex_Shape(resultOfConsWindQuest);
+                complex_shape_window.Show();
+                this.Hide();
+            }
         }
 
         private void Error(object sender, EventArgs e, string ErrorMsg)

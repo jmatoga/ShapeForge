@@ -32,17 +32,14 @@ namespace ProjektOkienkowy
         int new_beginning_y = 0; // nowy początek dla y
         int ifClicked = 0; // licznik ile razy został kliknięty guzik
 
-        public Complex_Shape()
+        public Complex_Shape(System.Windows.Forms.DialogResult resultOfConsWindQuest)
         {
             InitializeComponent();
-            ifWindowOrConsole(); // aby zapytac sie czy uzytkownik chce dzialac w konsoli czy okienkowo przy przejsciu na complex shape
+            ifWindowOrConsole(resultOfConsWindQuest); // aby zapytac sie czy uzytkownik chce dzialac w konsoli czy okienkowo przy przejsciu na complex shape
         }
 
-        private void ifWindowOrConsole()
+        private void ifWindowOrConsole(System.Windows.Forms.DialogResult resultOfConsWindQuest)
         {
-            System.Windows.Forms.DialogResult resultOfConsWindQuest; // zmienna przechowujaca odpowiedz na poniższego messageboxa
-            resultOfConsWindQuest = MessageBox.Show("Do you want to show you the figure in window?\nYes - window  No - console", "Choose console or window", MessageBoxButtons.YesNoCancel);
-
             if (resultOfConsWindQuest == DialogResult.Yes)
             {
                 whiteboard.Image = null;
@@ -75,11 +72,12 @@ namespace ProjektOkienkowy
                 object Value;
 
                 Value = Interaction.InputBox(message, title, defaultValue);
-                if ((string)Value == "")
+                if ((string)Value == defaultValue)
                 {
                     Value = defaultValue;
                     Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1.", MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
                 }
+                else if ((string)Value == "") { } // gdy sie kliknie cancel
                 else
                 {
                     string stringValue = (string)Value;
@@ -89,36 +87,36 @@ namespace ProjektOkienkowy
                         if (stringValue[i] < 48 || stringValue[i] > 57)
                         {
                             Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                            Environment.Exit(1);
+                            Application.Exit();
                         }
 
                     radius = Int32.Parse(Value.ToString()); // konwertuje z stringa do int i przypisuje do wartosci radius
+
+                    if (ifClicked > 0)
+                    {
+                        int beginning_y = (new_beginning_y - (radius / 2));
+                        g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
+                        g.DrawEllipse(pen_circle, new_beginning_x, beginning_y, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+
+                        // zeby nowa figura byla na srednicy a nie kwadracie
+                        new_beginning_x += radius; // x powiekoszne o sreddnice
+                        new_beginning_y = beginning_y + radius / 2; // zeby bylo w srodku kola
+                    }
+                    else
+                    {
+                        new_beginning_x += radius;
+                        g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
+                        g.DrawEllipse(pen_circle, 0, 180, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
+
+                        // zeby nowa figura zaczynala sie od konca srednicy a nie kwadratu
+                        new_beginning_x = radius;
+                        new_beginning_y = radius / 2 + 180;
+                    }
+                    count--;
+                    LabelOfLeftFigures.Text = "Figures left: " + count;
+
+                    ifClicked++; // jesli klikne to licznik w gore o jeden
                 }
-
-                if (ifClicked > 0)
-                {
-                    int beginning_y = (new_beginning_y - (radius / 2));
-                    g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                    g.DrawEllipse(pen_circle, new_beginning_x, beginning_y, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
-
-                    // zeby nowa figura byla na srednicy a nie kwadracie
-                    new_beginning_x += radius; // x powiekoszne o sreddnice
-                    new_beginning_y = beginning_y + radius / 2; // zeby bylo w srodku kola
-                }
-                else
-                {
-                    new_beginning_x += radius;
-                    g = whiteboard.CreateGraphics(); // tworzenie grafiki zmiennej na tablicy whiteboard
-                    g.DrawEllipse(pen_circle, 0, 0, radius, radius); // rysowanie elipsy (z ktorej robimy koło poprzez podanie 2 razy promienia w 2 ostatnich argumenatch)
-
-                    // zeby nowa figura zaczynala sie od konca srednicy a nie kwadratu
-                    new_beginning_x = radius;
-                    new_beginning_y = radius / 2;
-                }
-                count--;
-                LabelOfLeftFigures.Text = "Figures left: " + count;
-
-                ifClicked++; // jesli klikne to licznik w gore o jeden
             }
             else
                 Circle.Visible = false;
@@ -163,7 +161,7 @@ namespace ProjektOkienkowy
                             if (stringValue[i] < 32 || (stringValue[i] > 32 && stringValue[i] < 45 && stringValue[i] > 45 && stringValue[i] < 48) || stringValue[i] > 57)
                             {
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                         }
 
@@ -191,8 +189,8 @@ namespace ProjektOkienkowy
                         }
                         count--;
                         LabelOfLeftFigures.Text = "Figures left: " + count;
+                        ifClicked++;
                     }
-                    ifClicked++;
                 }
             }
         }
@@ -285,7 +283,7 @@ namespace ProjektOkienkowy
                             if (stringValue[i] < 32 || (stringValue[i] > 32 && stringValue[i] < 45 && stringValue[i] > 45 && stringValue[i] < 48) || stringValue[i] > 57)
                             {
                                 Microsoft.VisualBasic.Interaction.MsgBox("Error! You have to write an intiger for example 1 3. Fisrt letter of error in: " + stringValue[i], MsgBoxStyle.OkOnly | MsgBoxStyle.Information, "Data Error");
-                                Environment.Exit(1); // opuszczenie programu z kodem błedu 1
+                                Application.Exit(); // opuszczenie programu z kodem błedu 1
                             }
                         }
 
@@ -370,7 +368,7 @@ namespace ProjektOkienkowy
             {
                 Console.WriteLine(error.ErrorMessage);
                 Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                Environment.Exit(1); // zamknięcie konsoli
+                Application.Exit(); // zamknięcie konsoli
             }
         }
 
@@ -426,11 +424,11 @@ namespace ProjektOkienkowy
 
                     // trzeba zrobic 3 ify zamiast jednego bo trzeba sie jakos odwolywac do elemntow klasy (x1 y1 x2 y2)
                     if (i == 0 && args[j].x1 < 0)
-                            Error("Error! X1 can't be negativ intiger");
+                        Error("Error! X1 can't be negativ intiger");
                     if (i == 1 && args[j].y1 < 0)
-                            Error("Error! Y1 can't be negativ intiger");
+                        Error("Error! Y1 can't be negativ intiger");
                     if (i == 2 && args[j].x2 < 0)
-                            Error("Error! X2 can't be negativ intiger");
+                        Error("Error! X2 can't be negativ intiger");
 
                     if (i == 3 && (args[j].x1 == args[j].y1 || args[j].x2 == args[j].y2))
                         Error("Error! Badly matched coefficients");
@@ -440,7 +438,7 @@ namespace ProjektOkienkowy
             {
                 Console.WriteLine(error.ErrorMessage);
                 Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                Environment.Exit(1); // zamknięcie konsoli
+                Application.Exit(); // zamknięcie konsoli
             }
         }
 
@@ -498,11 +496,11 @@ namespace ProjektOkienkowy
 
                     // trzeba zrobic 3 ify zamiast jeden bo trzeba sie jakos odwolywac do elemntow klasy x1 y1 x2
                     if (i == 0 && d_args[j].dx1 < 0)
-                            Error("Error! X1 can't be negativ intiger");
+                        Error("Error! X1 can't be negativ intiger");
                     if (i == 1 && d_args[j].dy1 < 0)
-                            Error("Error! Y1 can't be negativ intiger");
+                        Error("Error! Y1 can't be negativ intiger");
                     if (i == 2 && d_args[j].dx2 < 0)
-                            Error("Error! X2 can't be negativ intiger");
+                        Error("Error! X2 can't be negativ intiger");
 
                     if (i == 3 && (d_args[j].dx1 == d_args[j].dy1 || d_args[j].dx2 == d_args[j].dy2))
                         Error("Error! Badly matched coefficients");
@@ -512,7 +510,7 @@ namespace ProjektOkienkowy
             {
                 Console.WriteLine(error.ErrorMessage);
                 Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                Environment.Exit(1); // zamknięcie konsoli
+                Application.Exit(); // zamknięcie konsoli
             }
         }
 
@@ -666,7 +664,7 @@ namespace ProjektOkienkowy
                 {
                     Console.WriteLine(error.ErrorMessage);
                     Console.ReadKey(); // zatrzymanie aby móc zobaczyć bład w konsoli
-                    Environment.Exit(1); // zamknięcie konsoli
+                    Application.Exit(); // zamknięcie konsoli
                 }
             }
         }
